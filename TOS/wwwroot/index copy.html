@@ -1,0 +1,574 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <title>Test</title>
+
+    <!-- Bootstrap CSS -->
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4.6.2/dist/css/bootstrap.min.css"
+        integrity="sha384-xOolHFLEh07PJGoPkLv1IbcEPTNtaed2xpHsD9ESMhqIYd0nLMwNLD69Npy4HI+N" crossorigin="anonymous">
+    <!-- 套入bootstrap 和 JQ -->
+    <script src="https://cdn.jsdelivr.net/npm/jquery@3.5.1/dist/jquery.slim.min.js"
+        integrity="sha384-DfXdz2htPH0lsSSs5nCTpuj/zy4C+OGpamoFVy38MVBnE+IbbVYUew+OrCXaRkfj"
+        crossorigin="anonymous"></script>
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@4.6.2/dist/js/bootstrap.bundle.min.js"
+        integrity="sha384-Fy6S3B9q64WdZWQUiU+q4/2Lc9npb8tCaSX9FK7E8HnRr0Jz8D6OP9dO5Vg3Q9ct"
+        crossorigin="anonymous"></script>
+
+
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.1/jquery.min.js"></script>
+
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.10.3/font/bootstrap-icons.css">
+    <!-- <link rel="stylesheet" href="style.css"> -->
+
+
+</head>
+
+
+
+<body>
+
+
+    <!-- <script>
+        var pteam = [{
+            id: 1,
+            seat: "First",
+            atk: 200,
+            def: 200,
+            spd: 300,
+            skill: [{
+                skillid: 1,
+                skillact: "A0",
+                skillobj: "B0"
+            },
+            {
+                skillid: 2,
+                skillact: "A1",
+                skillobj: "B1"
+            }],
+        }, {
+            id: 2,
+            seat: "Second",
+            atk: 300,
+            def: 400,
+            spd: 500,
+            skill: [{
+                skillid: 1,
+                skillact: "A0",
+                skillobj: "B0"
+            },
+            {
+                skillid: 2,
+                skillact: "A1",
+                skillobj: "B1"
+            }],
+        }, {
+            id: 3,
+            seat: "First",
+            atk: 200,
+            def: 200,
+            spd: 300,
+            skill: [{
+                skillid: 1,
+                skillact: "A0",
+                skillobj: "B0"
+            },
+            {
+                skillid: 2,
+                skillact: "A1",
+                skillobj: "B1"
+            }],
+        }, {
+            id: 4,
+            seat: "First",
+            atk: 200,
+            def: 200,
+            spd: 300,
+            skill: [{
+                skillid: 1,
+                skillact: "A0",
+                skillobj: "B0"
+            },
+            {
+                skillid: 2,
+                skillact: "A1",
+                skillobj: "B1"
+            }],
+        }, {
+            id: 5,
+            seat: "First",
+            atk: 200,
+            def: 200,
+            spd: 300,
+            skill: [{
+                skillid: 1,
+                skillact: "A0",
+                skillobj: "B0"
+            },
+            {
+                skillid: 2,
+                skillact: "A1",
+                skillobj: "B1"
+            }],
+        }
+        ];
+
+        var eteam = [{
+            id: 1,
+            seat: "First",
+            atk: 200,
+            def: 200,
+            spd: 300,
+            skill: [{
+                skillid: 1,
+                skillact: "A0",
+                skillobj: "B0"
+            },
+            {
+                skillid: 2,
+                skillact: "A1",
+                skillobj: "B1"
+            }],
+        }, {
+            id: 2,
+            seat: "Second",
+            atk: 300,
+            def: 400,
+            spd: 500,
+            skill: [{
+                skillid: 1,
+                skillact: "A0",
+                skillobj: "B0"
+            },
+            {
+                skillid: 2,
+                skillact: "A1",
+                skillobj: "B1"
+            }],
+        }, {
+            id: 3,
+            seat: "First",
+            atk: 200,
+            def: 200,
+            spd: 300,
+            skill: [{
+                skillid: 1,
+                skillact: "A0",
+                skillobj: "B0"
+            },
+            {
+                skillid: 2,
+                skillact: "A1",
+                skillobj: "B1"
+            }],
+        }, {
+            id: 4,
+            seat: "First",
+            atk: 200,
+            def: 200,
+            spd: 300,
+            skill: [{
+                skillid: 1,
+                skillact: "A0",
+                skillobj: "B0"
+            },
+            {
+                skillid: 2,
+                skillact: "A1",
+                skillobj: "B1"
+            }],
+        }, {
+            id: 5,
+            seat: "First",
+            atk: 200,
+            def: 200,
+            spd: 300,
+            skill: [{
+                skillid: 1,
+                skillact: "A0",
+                skillobj: "B0"
+            },
+            {
+                skillid: 2,
+                skillact: "A1",
+                skillobj: "B1"
+            }],
+        }
+        ];
+    </script> -->
+
+    <script>
+        // EX:
+        // 我方
+        // 先鋒技能
+        // 鼓舞 (開場) 提升我方全體攻20%
+        // 反擊 (自身) 當自身攻比對方攻低時，自身攻擊力提升25%
+
+        // 次鋒技能
+        // 八陣圖 (開場) 降低敵方全體速度30%
+        // 防守達人 (開場) 提升我方全體防20%
+
+        // 中堅技能
+        // 魔音 (自身) 降低敵方守20%
+        // 名門之後 (自身) 提升自身攻20%
+
+        // 副將
+        // 群雄 (自身) 提升自身攻20%
+        // 挾天子令諸侯 (自身) 提升自身攻50%
+
+        // 大將
+        // 威嚇 (開場) 降低敵方攻20%
+        // 獨眼龍 (自身) 提升自身攻40%，並降低敵方守20%
+
+        // 敵方
+        // 先鋒技能
+        // 死靈詛咒 (開場) 降低對方全體攻20%
+        // 死亡牽影 (自身) 吸收敵方攻擊力20%，並加入自身防禦力
+
+        // 次鋒技能
+        // 閃耀壁 (開場) 提升我方全體防15%
+        // 閃耀劍 (自身) 提升自身防15%
+
+        // 中堅次能
+        // 雙槍之擊 (自身) 提升自身攻15%
+        // 森林祝福 (自身) 提升自身防30%
+
+        // 副將
+        // 烈炎之劍 (自身) 提升自身攻35%
+        // 烈炎之盾 (自身) 吸收自身攻50%，並提升防
+
+        // 大將
+        // 急流 (開場) 降低敵方速15%
+        // 大海之祝福 (開場) 提升全隊防35%
+
+        // 技能發動
+        // 發動時機 開場 輪到自身 
+        // skillobj "A0" =>團隊 "A1" =>自身
+        // 發動條件 無條件 xxx比對方 高、低時 處於哪個位子時
+        // skillcon
+        // 無條件 => "NO"
+        // 攻高於對方時 => "AH"
+        // 守高於對方時 => "DH"
+        // 速高於對方時 => "SH"
+        // 攻低於對方時 => "AL"
+        // 守低於對方時 => "DL"
+        // 速低於對方時 => "SL"
+        // 特定位置時
+        // 先鋒 => "F"
+        // 次峰 => "S"
+        // 中堅 => "T"
+        // 副將 => "D"
+        // 大將 => "A"
+        // 特定條件
+        // "PP3" => 隊伍有三個人族
+        // "EP3" => 敵方隊伍有三個人族
+        // 發動效果 skilleff (團隊)(個人)(對手)(特定位子)攻守速 上升、下降 數值傳遞
+        // 玩家攻上升 => PatkU
+        // 玩家守上升 => PdefU
+        // 玩家速上升 => PspdU
+        // 對手攻上升 => EatkU
+        // 對手守上升 => EdefU
+        // 對手速上升 => EspdU
+        // 玩家攻下降 => PatkD
+        // 玩家守下降 => PdefD
+        // 玩家速下降 => PspdD
+        // 敵人攻下降 => EatkD
+        // 敵人守下降 => EdefD
+        // 敵人速下降 => EspdD
+        // 吸收敵攻提升防 => ABatkLdefU
+        // 發動數值 EX:自身攻擊力提升20% 對方守下降20% 自身50%攻擊力傳遞給下一位
+
+        // 我方資訊
+        // 鼓舞 (開場) 提升我方全體攻20%
+        // 反擊 (自身) 當自身攻比對方攻低時，自身攻擊力提升25%
+        var pteam = [{
+            id: 1,
+            seat: "First",
+            atk: 200,
+            def: 200,
+            spd: 100,
+            race: "Human",
+            attri: "Wood",
+            skill: [{
+                skillid: 1,
+                skilllv: 5,
+                skillpro: 70,
+                skillact: "A0",
+                skillcon: "NO",
+                skilleff: "PatkU",
+                skillint: 1.2
+            },
+            {
+                skillid: 5,
+                skilllv: 3,
+                skillpro: 65,
+                skillact: "A1",
+                skillcon: "AL",
+                skilleff: "PatkU",
+                skillint: 1.25
+            }],
+        }, {
+            id: 2,
+            seat: "Second",
+            atk: 300,
+            def: 400,
+            spd: 500,
+            race: "Devil",
+            attri: "Dark",
+            skill: [{
+                // 次鋒技能
+                // 八陣圖 (開場) 降低敵方全體速度30%
+                // 防守達人 (開場) 提升我方全體防20%
+                skillid: 4,
+                skilllv: 5,
+                skillpro: 70,
+                skillact: "A0",
+                skillcon: "NO",
+                skilleff: "EspdL",
+                skillint: 0.7
+            },
+            {
+                skillid: 1,
+                skilllv: 5,
+                skillpro: 70,
+                skillact: "A0",
+                skillcon: "NO",
+                skilleff: "PdefU",
+                skillint: 1.2
+            }],
+        }
+        ];
+        
+        // 敵方資訊
+        var eteam = [{
+            id: 1,
+            seat: "First",
+            atk: 400,
+            def: 200,
+            spd: 300,
+            race: "Human",
+            attri: "Dark",
+            skill: [{
+                // 死靈詛咒 (開場) 降低對方全體攻20%
+                // 死亡牽影 (自身) 吸收敵方攻擊力20%，並加入自身防禦力
+                skillid: 1,
+                skilllv: 5,
+                skillpro: 70,
+                skillact: "A0",
+                skillcon: "NO",
+                skilleff: "EatkL",
+                skillint: 0.8
+            },
+            {
+                skillid: 1,
+                skilllv: 5,
+                skillpro: 70,
+                skillact: "A1",
+                skillcon: "NO",
+                skilleff: "ABatkLdefU",
+                skillint: 1.2
+            }],
+        }, {
+            id: 2,
+            seat: "Second",
+            atk: 300,
+            def: 400,
+            spd: 500,
+            race: "Human",
+            attri: "Light",
+            skill: [{
+                skillid: 1,
+                skillact: "A0",
+                skillobj: "B0"
+            },
+            {
+                skillid: 2,
+                skillact: "A1",
+                skillobj: "B1"
+            }],
+        }
+        ];
+        // 我方總計
+        var pteamtotal = [{
+            atk: 0,
+            def: 0,
+            spd: 0
+        }]
+        // 敵方總計
+        var eteamtotal = [{
+            atk: 0,
+            def: 0,
+            spd: 0
+        }]
+        
+        // 搜尋出團隊buff
+        let skillbuff = []
+        // let u = eteam.filter(x => x.attri == "Fire").length
+        // 分類出開場發動還是自己回合發動
+        for(i = 0;i<pteam.length;i++){
+            let skillarr 
+            skillarr = pteam[i].skill.filter(s => s.skillact == "A1")
+            skillbuff = skillbuff.concat(skillarr)
+            //
+        }
+        // console.log(skillbuff)
+        console.log(skillbuff)
+        var ptt = pteamtotal[0]
+        var ett = eteamtotal[0]
+        // 進入戰鬥 尚未發動技能時 先算出總合 攻 防 速 總和
+        function getpteamTotal() {
+            ptt.atk = 0
+            ptt.def = 0
+            ptt.spd = 0
+            for (let i = 0; i < pteam.length; i++) {
+
+                ptt.atk += pteam[i].atk;
+                ptt.def += pteam[i].def;
+                ptt.spd += pteam[i].spd;
+            }
+        }
+        function geteteamTotal() {
+            ett.atk = 0
+            ett.def = 0
+            ett.spd = 0
+            for (let i = 0; i < eteam.length; i++) {
+                ett.atk += eteam[i].atk;
+                ett.def += eteam[i].def;
+                ett.spd += eteam[i].spd;
+            }
+        }
+
+        getpteamTotal()
+        geteteamTotal()
+
+        function pstart() {
+            // 我方
+            // 鼓舞 (開場) 提升我方全體攻20%
+            for (let i = 0; i < pteam.length; i++) {
+                pteam[i].atk *= 1.2
+            }
+            for (i = 0;i < eteam.length;i++){
+                eteam[i].spd *= 0.7
+            }
+            for (let i = 0; i < pteam.length; i++) {
+                pteam[i].def *= 1.2
+            }
+            for (i = 0;i < eteam.length;i++){
+                eteam[i].atk *= 0.8
+            }
+            getpteamTotal()
+            geteteamTotal()
+        }
+        function estart() {
+            // 敵方
+            for (i = 0; i < pteam.length; i++) {
+                pteam[i].atk *= 0.8
+            }
+            for (i = 0; i < eteam.length; i++) {
+                eteam[i].def *= 1.15
+            }
+            for (i = 0; i < eteam.length; i++) {
+                eteam[i].spd *= 0.85
+            }
+            for (i = 0; i < pteam.length; i++) {
+                pteam[i].def *= 1.35
+            }
+            getpteamTotal()
+            geteteamTotal()
+        }
+        
+        // 開場技能發動回合 當我方速度總和大於對面時 先發動技能 反之 對方先發動 
+        if (ptt.spd >= ett.spd) {
+            pstart()
+            estart()
+        }
+        else {
+            estart()
+            pstart()
+        }
+
+        // 先鋒回合
+        // 我方 先鋒 反擊 (自身) 當自身攻比對方攻低時，自身攻擊力提升25%
+        // 敵方 先鋒 死亡牽影 (自身) 吸收敵方攻擊力20%，並加入自身防禦力
+        if (pteam[0].spd >= eteam[0].spd) {
+            // 我方
+            // 反擊 (自身) 當自身攻比對方攻低時，自身攻擊力提升25%
+            if (pteam[0].atk < eteam[0].atk) {
+                pteam[0].atk *= 1.25
+            }
+            // 敵方
+            // 死亡牽影 (自身) 吸收敵方攻擊力20%，並加入自身防禦力
+            eteam[0].def += pteam[0].atk * .2
+        }
+        else {
+            // 敵方
+            // 死亡牽影 (自身) 吸收敵方攻擊力20%，並加入自身防禦力
+            eteam[0].def += pteam[0].atk * .2
+
+            // 我方
+            // 反擊 (自身) 當自身攻比對方攻低時，自身攻擊力提升25%
+            if (pteam[0].atk < eteam[0].atk) {
+                pteam[0].atk *= 1.25
+            }
+        }
+
+        // 次鋒回合
+        // 敵方 次鋒 閃耀劍 (自身) 提升自身防15%
+        eteam[1].def *= 1.15
+
+        // 中堅回合
+        // 我方 中堅 魔音 (自身) 降低敵方守20%
+        // 我方 中堅 中堅名門之後 (自身) 提升自身攻20%
+        // 敵方 中堅 雙槍之擊 (自身) 提升自身攻15%
+        // 敵方 中堅 森林祝福 (自身) 提升自身防30%
+        // if(pteam[2].spd >= eteam[2].spd) {
+        //     // 自
+        //     eteam[2].def *= 0.8
+        //     pteam[2].atk *= 1.2
+        //     // 敵
+        //     eteam[2].atk *= 1.15
+        //     eteam[2].def *= 1.3
+        // } 
+        // else {
+        //     // 敵
+        //     eteam[2].atk *= 1.15
+        //     eteam[2].def *= 1.3
+        //     // 自
+        //     eteam[2].def *= 0.8
+        //     pteam[2].atk *= 1.2
+        // }
+        
+        // 副將回合
+        // 我方 副將 群雄 (自身) 提升自身攻20%
+        // 我方 副將 挾天子令諸侯 (自身) 提升自身攻50%
+        // 敵方 副將 烈炎之劍 (自身) 提升自身攻35%
+        // 敵方 副將 烈炎之盾 (自身) 吸收自身攻50%，並提升防
+        // if(pteam[3].spd >= eteam[3].spd) {
+        //     // 我
+        //     pteam[3].atk *= 1.2
+        //     pteam[3].atk *= 1.5
+        //     // 敵
+        //     eteam[3].atk *= 1.35
+        //     eteam[3].def += (eteam[3] *= .5)
+        // }
+        // else {
+        //     // 敵
+        //     eteam[3].atk *= 1.35
+        //     eteam[3].def += (eteam[3] *= .5)
+        //     // 我
+        //     pteam[3].atk *= 1.2
+        //     pteam[3].atk *= 1.5
+        // }
+        // 大將回合
+        // 獨眼龍 (自身) 提升自身攻40%，並降低敵方守20%
+        // pteam[4].atk *= 1.4
+        // eteam[4].def *= 0.8
+    </script>
+
+</body>
+
+</html>

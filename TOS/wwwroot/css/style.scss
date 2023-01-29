@@ -1,0 +1,575 @@
+body {
+    // background-image: url(img/龐貝城.jpg);
+    background-size: cover;
+    background-position: center;
+    overflow-x: hidden;
+}
+
+.container {
+    max-width: 1920px;
+}
+
+.red {
+    color: red;
+}
+
+.blue {
+    color: blue;
+}
+
+.green {
+    color: #028f76;
+}
+
+.jcontentStart {
+    justify-content: start;
+}
+
+.jcontentEnd {
+    justify-content: end;
+}
+
+.flexrev {
+    flex-direction: row-reverse;
+}
+
+.total-container {
+    max-height: 100vh;
+    padding: 0;
+}
+
+.header-info {
+    // background-color: aqua;
+    width: 100vw;
+    height: 5vh;
+}
+
+.middle-info {
+    // background-color: blanchedalmond;
+    width: 100vw;
+    margin: 0;
+
+    .black-background {
+        width: 100%;
+        height: 95vh;
+        position: absolute;
+        background-color: rgb(0, 0, 0);
+        opacity: 0;
+        z-index: 0;
+    }
+
+    .battle-info {
+        font-size: 24px;
+        position: absolute;
+        text-align: center;
+        align-items: center;
+        justify-content: center;
+        right: 50%;
+        top: 20%;
+        z-index: 2;
+
+        #start {
+            font-size: 48px;
+            font-weight: 900;
+            writing-mode: vertical-lr;
+            border: 0;
+            background: rgb(0, 0, 0, 0);
+            color: rgba(245, 244, 232, 1);
+            cursor: pointer;
+        }
+
+        h1 {
+            font-size: 64px;
+            letter-spacing: 1rem;
+            font-weight: 900;
+            writing-mode: vertical-lr;
+            color: #fff;
+        }
+    }
+
+    .test-img {
+        width: 100vw;
+        height: 95vh;
+        padding: 0;
+        // background-color: wheat;
+        display: flex;
+        //justify-content:end;
+        position: absolute;
+        // z-index: -1;
+
+        .test-box {
+            width: 20vw;
+            height: 95vh;
+            position: relative;
+            margin: 0;
+
+            // background-color: rgb(53, 92, 125, .8);
+            img {
+                width: 20vw;
+                height: 95vh;
+                object-fit: cover;
+                object-position: center;
+                // border: 4px solid white;
+            }
+
+            .banner-text {
+                width: 100%;
+                position: absolute;
+                top: 50%;
+                text-align: center;
+
+                h4 {
+                    // border-bottom: 1px solid goldenrod;
+                    margin: auto;
+                    background-color: rgb(53, 92, 125, .35);
+                    font-size: 60px;
+                    text-shadow: 0 0 10px goldenrod, 0 0 10px goldenrod, 0 0 10px goldenrod, 0 0 10px goldenrod;
+                    font-weight: 900;
+                    color: #9e0c39;
+                }
+            }
+        }
+    }
+
+    .player-info {
+        height: 90vh;
+        padding: 0;
+        transition: 1s;
+
+        .main-img {
+            height: 60vh;
+            text-align: center;
+            position: relative;
+
+            img {
+                width: 100%;
+                object-fit: contain;
+            }
+        }
+
+        // #play-photo {
+        //     transform: translateX(-500px);
+        // }
+
+        .text-info {
+
+            position: relative;
+            display: flex;
+            width: 100%;
+            height: 5vh;
+            font-size: 30px;
+            font-weight: bold;
+            text-align: left;
+            z-index: 4;
+
+            .text-container {
+                display: flex;
+                padding: 0;
+
+                .Name-info {
+                    display: flex;
+
+                    // width: 300px;
+                    h2 {
+                        // width: 150px;
+                        font-weight: bold;
+                        color: red;
+                    }
+
+                    span {
+                        width: 150px;
+                        color: #fff;
+                    }
+                }
+
+                .text-title {
+                    width: 15%;
+                    align-items: center;
+                    justify-content: center;
+
+                    span {
+                        height: 100%;
+                        align-items: center;
+                        justify-content: center;
+                        margin: auto;
+                    }
+                }
+
+                .text {
+                    width: 85%;
+                    margin-right: .5rem;
+                    text-align: right;
+                    align-items: right;
+                    color: #fff;
+                    line-height: 48px;
+
+                    span {
+                        align-items: center;
+                        justify-content: center;
+                    }
+                }
+            }
+
+        }
+
+        .bot-info {
+            width: 100%;
+            height: 15vh;
+            //position: relative;
+            //z-index: 4;
+
+            .bot-imgbox {
+                display: flex;
+                width: 100%;
+                height: 10vh;
+                //position: relative;
+                top: 0;
+                bottom: 0;
+                text-align: center;
+                margin: auto;
+
+                .img-item {
+                    margin-top: 60px;
+                    position: relative;
+                    z-index: 4;
+
+                    span {
+                        position: relative;
+
+                        img {
+                            position: relative;
+                            width: 65%;
+                            margin: 0 .5rem;
+                            object-fit: contain;
+
+                        }
+
+                        &::before {
+                            content: attr(datatext);
+                            color: skyblue;
+                            width: 80px;
+                            font-size: 24px;
+                            font-weight: bold;
+                            position: absolute;
+                            left: 50%;
+                            transform: translateX(-50%);
+                            top: -85px;
+                        }
+                    }
+                }
+
+                // border: 4px solid red;
+
+            }
+        }
+    }
+}
+
+.atkint,
+.defint,
+.spdint {
+    &::before {
+        content: attr(datatext);
+        width: 100px;
+        position: absolute;
+        //left: 50;
+        transform: translateX(40%);
+        top: 15px;
+        color: red;
+    }
+}
+
+.total-text {
+    &::before {
+        content: attr(datatext);
+        font-size: 14px;
+        font-weight: bold;
+        width: 100px;
+        position: absolute;
+        left: 25%;
+        transform: translateX(-50%);
+        top: 40px;
+        color: orange;
+    }
+}
+
+// @media (max-width: 1400px) { ... }
+
+// @media (max-width: 1200px) { ... }
+
+// @media (max-width: 992px) { ... }
+
+// @media (max-width: 768px) { ... }
+
+// @media (max-width: 576px) { ... }
+
+// 註冊登錄頁面
+
+section {
+    position: relative;
+    width: 100%;
+    height: 100vh;
+    display: flex;
+    box-sizing: border-box;
+
+    .imgBx {
+        position: relative;
+        width: 50%;
+        height: 100%;
+        z-index: 1;
+
+        &:before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: linear-gradient(225deg, #e91e63, #03a9f4);
+            z-index: 1;
+            // 背景混合
+            mix-blend-mode: screen;
+        }
+
+        img {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+        }
+    }
+
+    .contentBx {
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        width: 50%;
+        height: 100%;
+
+        .formBx {
+            width: 50%;
+
+            h2 {
+                color: #607d8b;
+                font-weight: 600;
+                font-size: 1.5rem;
+                text-transform: uppercase;
+                margin-bottom: 20px;
+                border-bottom: 4px solid #ff4584;
+                display: inline-block;
+                letter-spacing: .5rem;
+            }
+
+            .inputBx {
+                margin-bottom: 20px;
+
+                span {
+                    font-size: 24px;
+                    font-weight: 400;
+                    margin-bottom: 5px;
+                    display: inline-block;
+                    color: #607d8b;
+                    letter-spacing: .5rem;
+                }
+
+                input {
+                    width: 100%;
+                    padding: 10px 20px;
+                    outline: none;
+                    font-size: 24px;
+                    font-weight: 400;
+                    color: #607d8b;
+                    border: 1px solid #607d8b;
+                    letter-spacing: 1px;
+                    background: transparent;
+                    border-radius: 5rem;
+                }
+
+                input[type="button"] {
+
+                    background: #ff4584;
+                    color: #fff;
+                    outline: none;
+                    border: none;
+                    font-weight: 500;
+                    letter-spacing: .5 rem;
+                    cursor: pointer;
+
+                    &:hover {
+                        background: #f53677;
+                        transition: .2s;
+                    }
+                }
+
+                p {
+                    font-size: 24px;
+                    color: #607d8b;
+                }
+
+                a {
+                    font-size: 24px;
+                    text-decoration: none;
+                    color: #ff4584;
+                }
+            }
+
+            .remember {
+                margin: 20px 0;
+                color: #607d8b;
+                font-weight: 400;
+                font-size: 24px;
+
+                input[type=checkbox] {
+                    width: 24px;
+                    height: 20px;
+                    margin: 0 .2rem;
+                }
+
+            }
+        }
+    }
+
+}
+
+.playerpage {
+    position: relative;
+    width: 100%;
+    height: 100vh;
+    box-sizing: border-box;
+
+    .headerBx {
+        width: 100%;
+        height: 5%;
+        background-color: rgba(207, 97, 7, 0.685);
+        font-size: 24px;
+        line-height: 48px;
+        font-weight: 400;
+        color: #fff;
+        //border-bottom: 8px solid #fffff2;
+        .nameBx {
+            width: 100%;
+        }
+    }
+
+    .containerBx {
+        width: 100%;
+        height: 95%;
+        display: flex;
+        position: relative;
+        background-image: url(../img/藏書界限.jpg);
+        background-size: cover;
+        //background-repeat: no-repeat;
+
+        .imgContainer {
+            width: 40%;
+            height: 100%;
+
+            // position: relative;
+            // top: 0;
+            // left: 0;
+            img {
+                width: 100%;
+                height: 100%;
+                object-fit: cover;
+            }
+        }
+
+        .contentContainer {
+            width: 60%;
+            height: 100%;
+            display: flex;
+            flex-wrap: wrap;
+            align-items: center;
+            justify-content: center;
+            align-content: center;
+
+            .btnBx {
+                width: 50%;
+                height: 10%;
+                margin: 0;
+                background-color: #607d8b;
+            }
+
+            button {
+                width: 35%;
+                height: 10%;
+                margin: 2rem 1rem;
+                padding-left: 2rem;
+                text-align: left;
+                font-size: 36px;
+                font-weight: 600;
+                letter-spacing: 1rem;
+                color: #fff;
+                background: rgb(32, 73, 105, .8);
+                border: none;
+                border-radius: 1rem;
+
+                &:first-child {
+                    background-image: url(../img/little/Story.png);
+                    background-repeat: no-repeat;
+                    background-size: contain;
+                    background-position: right;
+                }
+
+                &:nth-child(2) {
+                    background-image: url(../img/little/battle.png);
+                    background-repeat: no-repeat;
+                    background-size: contain;
+                    background-position: right;
+                }
+            }
+        }
+
+    }
+
+    .botBx {
+        width: 100%;
+        //height: 10%;
+        position: absolute;
+        left: 0;
+        bottom: 0;
+        z-index: 1;
+
+        a {
+            width: 25%;
+            font-size: 42px;
+            font-weight: 900;
+            letter-spacing: 1rem;
+            background-color: rgba(204, 12, 140, 0.637);
+            color: #fff;
+            border: 2px solid salmon;
+            text-align: center;
+            text-decoration: none;
+        }
+    }
+}
+
+@media (max-width: 768px) {
+    section {
+        .imgBx {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            z-index: 1;
+        }
+
+        .contentBx {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            width: 100%;
+            height: 100%;
+            z-index: 2;
+
+            .formBx {
+                width: 100%;
+                padding: 40px;
+                background: rgb(255, 255, 255, .8);
+            }
+        }
+    }
+}

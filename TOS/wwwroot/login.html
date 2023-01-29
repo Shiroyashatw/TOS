@@ -1,0 +1,98 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>登入</title>
+
+    <!-- Bootstrap CSS -->
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/css/bootstrap.min.css" rel="stylesheet"
+        integrity="sha384-GLhlTQ8iRABdZLl6O3oVMWSktQOp6b7In1Zl3/Jr59b6EGGoI1aFkw7cmDA6j6gD" crossorigin="anonymous">
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/js/bootstrap.bundle.min.js"
+        integrity="sha384-w76AqPfDkMBDXo30jS1Sgez6pr3x5MlQ1ZAGC+nuZB+EYdgRZgiwxhTBTkF7CXvN"
+        crossorigin="anonymous"></script>
+
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.1/jquery.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/axios@1.1.2/dist/axios.min.js"></script>
+
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.10.3/font/bootstrap-icons.css">
+    <link rel="stylesheet" href="css/style.css">
+
+</head>
+
+<body>
+
+    <section>
+        <div class="imgBx">
+            <img src="img/10370.png" alt="">
+        </div>
+        <div class="contentBx">
+            <div class="formBx">
+                <h2>登入</h2>
+                <form action="">
+                    <div class="inputBx">
+                        <span>帳號</span>
+                        <input type="text" name="account">
+                        <span></span>
+                    </div>
+                    <div class="inputBx">
+                        <span>密碼</span>
+                        <input type="password" name="password">
+                    </div>
+                    <div class="remember">
+                        <label for=""><input type="checkbox" name="">記住我</label>
+                    </div>
+                    <div class="inputBx">
+                        <input id="btnSend" type="button" name="" value="登入">
+                    </div>
+                    <div class="inputBx">
+                        <p>沒有帳號? <a href="">註冊</a></p>
+                    </div>
+                </form>
+            </div>
+        </div>
+    </section>
+
+
+    <script>
+
+        axios({
+            method: "get",
+            url: "api/Login"
+        }).then(
+            res => {
+                console.log(res)
+                if(res.data == "已登入") {
+                    $(location).attr("href", "main.html")
+                }
+            }
+        ).catch(
+            err => {
+                console.log(err)
+            }
+        )
+
+        $('#btnSend').on('click', function () {
+            axios({
+                method: "post",
+                url: "api/Login",
+                data: {
+                    account: $('input[name="account"]').val(),
+                    password: $('input[name="password"]').val(),
+                }
+            }).then(
+                res => {
+                    if (res.data == "OK") {
+                        $(location).attr("href", "main.html")
+                    }
+                    
+                }
+
+            ).catch((error) => console.log(error))
+        })
+    </script>
+</body>
+
+</html>

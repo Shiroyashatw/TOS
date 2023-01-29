@@ -1,0 +1,450 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <title>Test</title>
+
+    <!-- Bootstrap CSS -->
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4.6.2/dist/css/bootstrap.min.css"
+        integrity="sha384-xOolHFLEh07PJGoPkLv1IbcEPTNtaed2xpHsD9ESMhqIYd0nLMwNLD69Npy4HI+N" crossorigin="anonymous">
+    <!-- 套入bootstrap 和 JQ -->
+    <script src="https://cdn.jsdelivr.net/npm/jquery@3.5.1/dist/jquery.slim.min.js"
+        integrity="sha384-DfXdz2htPH0lsSSs5nCTpuj/zy4C+OGpamoFVy38MVBnE+IbbVYUew+OrCXaRkfj"
+        crossorigin="anonymous"></script>
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@4.6.2/dist/js/bootstrap.bundle.min.js"
+        integrity="sha384-Fy6S3B9q64WdZWQUiU+q4/2Lc9npb8tCaSX9FK7E8HnRr0Jz8D6OP9dO5Vg3Q9ct"
+        crossorigin="anonymous"></script>
+
+
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.1/jquery.min.js"></script>
+
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.10.3/font/bootstrap-icons.css">
+    <link rel="stylesheet" href="css/style.css">
+
+
+</head>
+
+
+
+<body>
+    <div class="container">
+        <div class="total-container row">
+            <!-- 頭頂標題資訊列 -->
+            <div class="header-info col-12">
+            </div>
+            <div class="middle-info row">
+                <!-- 背景黑幕 -->
+                <div class="black-background"></div>
+
+                <div class="battle-info">
+                    <h1 id="start">開始</h1>
+                    <!-- <h1>先鋒戰</h1> -->
+                </div>
+                <div id="playImg" class="test-img col-12 text-left">
+                    <div class="test-box" id="box5">
+                        <img src="img/Monster_1294_競技場_飛瓣千金 ‧ 孫尚香.png" alt="">
+                        <div class="banner-text">
+                            <h4>水波紋</h4>
+                        </div>
+                    </div>
+                    <div class="test-box" id="box4">
+                        <img src="img/Monster_1284_三國_諸葛亮.png" alt="">
+                        <div class="banner-text">
+                            <h4>火舞</h4>
+                        </div>
+                    </div>
+                    <div class="test-box" id="box3">
+                        <img src="img/Monster_1295_地獄魔王_愁楚孤女 ‧ 甄宓.png" alt="">
+                        <div class="banner-text">
+                            <h4>飛行員</h4>
+                        </div>
+                    </div>
+                    <div class="test-box" id="box2">
+                        <img src="img/Monster_1278_三國_曹操.png" alt="">
+                        <div class="banner-text">
+                            <h4>暴君</h4>
+                            <h4>千古一帝</h4>
+                        </div>
+                    </div>
+                    <div class="test-box" id="box1">
+
+                        <img src="img/1679.png" alt="">
+                        <div class="banner-text">
+                            <h4>獨眼龍</h4>
+                        </div>
+                    </div>
+                </div>
+                <div id="emyImg" class="test-img col-12 text-right jcontentEnd flexrev">
+                    <div class="test-box" id="box10">
+                        <img src="img/Monster_0408_主角_大魔導士莫莉.png" alt="">
+                        <div class="banner-text">
+                            <h4>獨眼龍</h4>
+                        </div>
+                    </div>
+                    <div class="test-box" id="box9">
+                        <img src="img/Monster_0409_主角_龍焰騎士肖恩.png" alt="">
+                        <div class="banner-text">
+                            <h4>暴君</h4>
+                            <h4>千古一帝</h4>
+                        </div>
+                    </div>
+                    <div class="test-box" id="box8">
+                        <img src="img/Monster_0410_主角_大地霸主鄧肯.png" alt="">
+                        <div class="banner-text">
+                            <h4>飛行員</h4>
+                        </div>
+                    </div>
+                    <div class="test-box" id="box7">
+                        <img src="img/Monster_0411_主角_公爵奈寶尼.png" alt="">
+                        <div class="banner-text">
+                            <h4>閃耀劍</h4>
+                        </div>
+                    </div>
+                    <div class="test-box" id="box6">
+                        <img src="img/Monster_0412_主角_死靈魔導安多.png" alt="">
+                        <div class="banner-text">
+                            <h4>死靈詛咒</h4>
+                        </div>
+                    </div>
+
+
+                </div>
+                <div class="player-info col-6">
+
+                    <div class="main-img" id="play-photo">
+                        <img src="img/1679.png" alt="">
+                    </div>
+
+                    <div class="text-info col-12 player">
+                        <div class="text-container col-12">
+                            <div class="Name-info  col-12 text-left">
+                                <h2 class="col-4">召換師</h2>
+                                <span class="col-4">人</span>
+                                <span class="col-4">玩家姓名</span>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="text-info col-12 player">
+                        <div class="text-container col-4">
+                            <div class="text-title">
+                                <span class="red total-text" datatext="合計">攻:</span>
+                            </div>
+                            <div class="text play">
+                                <span class="atkint" datatext=""></span>
+                            </div>
+                        </div>
+                        <div class="text-container col-4">
+                            <div class="text-title">
+                                <span class="blue total-text" datatext="合計">守:</span>
+                            </div>
+                            <div class="text play">
+                                <span class="defint" datatext=""></span>
+                            </div>
+                        </div>
+                        <div class="text-container col-4">
+                            <div class="text-title">
+                                <span class="green total-text" datatext="合計">速:</span>
+                            </div>
+                            <div class="text play">
+                                <span class="spdint" datatext=""></span>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="bot-info">
+                        <div class="bot-imgbox pbot">
+                            <div class="img-item">
+                                <span datatext="大將"><img src="img/little/1679.png" alt=""></span>
+                            </div>
+                            <div class="img-item">
+                                <span datatext="副將"><img src="img/little/1278.png" alt=""></span>
+                            </div>
+                            <div class="img-item">
+                                <span datatext="中堅"><img src="img/little/1295.png" alt=""></span>
+                            </div>
+                            <div class="img-item">
+                                <span datatext="次鋒"><img src="img/little/1284.png" alt=""></span>
+                            </div>
+                            <div class="img-item">
+                                <span datatext="先鋒"><img src="img/little/1294.png" alt=""></span>
+                            </div>
+                        </div>
+                    </div>
+
+
+                </div>
+                <div class="player-info col-6">
+
+                    <div class="main-img" id="emy-photo">
+                        <img src="img/Monster_0408_主角_大魔導士莫莉.png" alt="">
+                    </div>
+
+                    <div class="text-info col-12 enemy">
+                        <div class="text-container col-12">
+                            <div class="Name-info  col-12 text-right">
+                                <span class="col-4">玩家姓名</span>
+                                <span class="col-4">人</span>
+                                <h2 class="col-4">敵人</h2>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="text-info col-12 enemy">
+                        <div class="text-container col-4">
+                            <div class="text-title">
+                                <span class="red total-text" datatext="合計">攻:</span>
+                            </div>
+                            <div class="text emy">
+                                <span class="atkint" datatext=""></span>
+                            </div>
+                        </div>
+                        <div class="text-container col-4">
+                            <div class="text-title">
+                                <span class="blue total-text" datatext="合計">守:</span>
+                            </div>
+                            <div class="text">
+                                <span class="defint" datatext=""></span>
+                            </div>
+                        </div>
+                        <div class="text-container col-4">
+                            <div class="text-title">
+                                <span class="green total-text" datatext="合計">速:</span>
+                            </div>
+                            <div class="text">
+                                <span class="spdint" datatext=""></span>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="bot-info">
+                        <div class="bot-imgbox ebot flexrev">
+                            <div class="img-item">
+                                <span datatext="大將"><img src="img/little/0408.png" alt=""></span>
+                            </div>
+                            <div class="img-item">
+                                <span datatext="副將"><img src="img/little/0409.png" alt=""></span>
+                            </div>
+                            <div class="img-item">
+                                <span datatext="中堅"><img src="img/little/0410.png" alt=""></span>
+                            </div>
+                            <div class="img-item">
+                                <span datatext="次鋒"><img src="img/little/0411.png" alt=""></span>
+                            </div>
+                            <div class="img-item">
+                                <span datatext="先鋒"><img src="img/little/0412.png" alt=""></span>
+                            </div>
+                        </div>
+                    </div>
+
+
+                </div>
+            </div>
+        </div>
+    </div>
+
+
+
+
+    <script>
+
+        var n1 = Math.round(Math.random() * 100); //獲取100之內的任意一個整數;
+
+        function delay(n) {
+            return new Promise(function (resolve) {
+                setTimeout(resolve, n * 1000);
+            });
+        }
+
+        function playAudio() {
+            const audio = document.createElement("audio")
+            audio.src = "se/Collapse2.m4a";
+            audio.volume = .25;
+            audio.play();
+        }
+
+
+        $(function () {
+            $("#box1").hide();
+            $("#box2").hide();
+            $("#box3").hide();
+            $("#box4").hide();
+            $("#box5").hide();
+            $("#box6").hide();
+            $("#box7").hide();
+            $("#box8").hide();
+            $("#box9").hide();
+            $("#box10").hide();
+        })
+
+        $(function () {
+            
+            $("#start").on("click", async function () {
+
+                // text-info 中間攻防資訊 z-index 設最高 不會被蓋過 3
+
+                // bot-info  底部資訊欄 z-index 設1 可被黑背景蓋過 一開始應該要設2 進入個別戰才變1
+                $('#start').hide();
+                $(".test-img").css("z-index", 4);
+
+                // $("#box5").fadeIn(600);
+                // $("#box4").fadeIn(600);
+                // $("#box3").fadeIn(600);
+                // $("#box2").fadeIn(600);
+                $("#box1").fadeIn(600);
+                // 發動技能的一方 z-index 為 2 要比 背景黑平行
+
+                $('#play-photo').css({
+                    "z-index": 2
+                })
+
+                $('.black-background').css({
+                    "opacity": .35,
+                    "z-index": 2,
+                    "transition": "1s"
+                })
+                await delay(1)
+
+                $('.play .atkint').attr('datatext', "123")
+
+                //playAudio()
+
+                await delay(1);
+
+                $('.play .atkint').attr('datatext', "")
+                $("#box1").fadeOut(600);
+
+                // $("#box2").fadeOut(600);
+                // $("#box3").fadeOut(600);
+                // $("#box4").fadeOut(600);
+                // $("#box5").fadeOut(600);
+
+                await delay(1);
+                $('#play-photo').css({
+                    "z-index": 1
+                })
+                $('#emy-photo').css({
+                    "z-index": 2
+                })
+                // $("#box10").fadeIn(600);
+                // $("#box9").fadeIn(600);
+                // $("#box8").fadeIn(600);
+                $("#box7").fadeIn(600);
+                $("#box6").fadeIn(600);
+
+                await delay(1)
+
+                $('.emy .atkint').attr('datatext', "123")
+
+                //playAudio()
+
+                await delay(1);
+
+                $('.emy .atkint').attr('datatext', "")
+                // $("#box10").fadeOut(600);
+                // $("#box9").fadeOut(600);
+                // $("#box8").fadeOut(600);
+                $("#box7").fadeOut(600);
+                $("#box6").fadeOut(600);
+
+                await delay(1);
+
+                $('#emy-photo').css({
+                    "z-index": 1
+                })
+                $('.img-item').css({
+                    "z-index": 1
+                })
+                $('.black-background').css({
+                    "opacity": .6,
+                    "z-index": 2,
+                    "transition": "2s"
+                })
+
+
+
+                $('#play-photo,.player').css({
+                    "transform": "translateX(-1000px)",
+                    "transition": "2s"
+                })
+                $('#emy-photo,.enemy').css({
+                    "transform": "translateX(1000px)",
+                    "transition": "2s"
+                })
+                await delay(1.5);
+                $('#play-photo').empty();
+                $('#emy-photo').empty();
+
+                $('#play-photo').append(`<img src="img/Monster_1294_競技場_飛瓣千金 ‧ 孫尚香.png" alt="">`);
+                $('#emy-photo').append(`<img src="img/Monster_0412_主角_死靈魔導安多.png" alt="">`);
+
+
+                await delay(1);
+                $('.battle-info').append(`<h1>先鋒戰</h1>`)
+                $('.battle-info').fadeOut(600)
+
+                await delay(.5);
+                $('.black-background').css({
+                    "opacity": .3,
+                    "transition": "1s"
+                })
+                $('#play-photo,.player').css({
+                    "transform": "translateX(0)",
+                    "transition": "2s",
+                    "z-index": 2
+                })
+                $('#emy-photo,.enemy').css({
+                    "transform": "translateX(0)",
+                    "transition": "2s",
+                    "z-index": 2
+                })
+
+                $('.pbot .img-item:last-child').css({
+                    "width": "65%",
+                    "transition": "1s",
+                    "z-index": 2
+                })
+                $('.ebot .img-item:last-child').css({
+                    "width": "65%",
+                    "transition": "1s",
+                    "z-index": 2
+                })
+                // await delay(2.5)
+
+                // $('#play-photo,.player').css({
+                //     "transform": "translateX(0)",
+                //     "transition": "2s"
+                // })
+                // $('#emy-photo,.enemy').css({
+                //     "transform": "translateX(0)",
+                //     "transition": "2s"
+                // })
+            })
+        })
+        // $(function () {
+        //     $("#start").on("click", function () {
+        //         // alert(n1);
+        //         if(n1 >= 30){
+        //             atkplus = atkplus * 1.5;
+        //             $("#skill").text("技能發動");
+        //         }
+        //         else{
+        //             $("#skill").text("技能未發動");
+        //         }
+        //         $("#atktext").text(`+${atkplus}`, function () {
+        //             $("#atktext").fadeIn(3000);
+        //         });
+        //         // $("#atktext").fadeIn(3000,function(){
+        //         //     $("#atktext").text(`+${atkplus}`);
+        //         // });
+
+        //         $("#atktext").fadeOut(1000);
+
+        //         $("#atk").text(`攻擊:${atl + atkplus}`);
+        //     })
+        // })
+    </script>
+
+</body>
+
+</html>
