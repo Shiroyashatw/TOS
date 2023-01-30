@@ -449,7 +449,38 @@ section .contentBx .formBx .remember input[type=checkbox] {
   text-align: center;
   text-decoration: none;
 }
-
+.playerpage .btnUIBx {
+  display: flex;
+}
+.playerpage .btnUIBx .btnBx button {
+  font-size: 24px;
+  font-weight: 700;
+  background-color: #333;
+  color: #fff;
+}
+.playerpage .contingentBx {
+  display: flex;
+}
+.playerpage .contingentBx .teamBx button,
+.playerpage .contingentBx .bagTagBx button {
+  width: 100px;
+  font-size: 24px;
+  font-weight: 700;
+  background-color: #333;
+  color: #fff;
+}
+.playerpage .mainBx {
+  display: flex;
+}
+.playerpage .mainBx .teamInfoBx {
+  height: 80vh;
+}
+.playerpage .mainBx .teamInfoBx .teamComposeBx {
+  display: flex;
+  flex-direction: row;
+  justify-content: space-around;
+  border: 2px solid #e91e63;
+}
 @media (max-width: 768px) {
   section .imgBx {
     position: absolute;

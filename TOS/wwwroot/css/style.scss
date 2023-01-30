@@ -447,6 +447,7 @@ section {
         line-height: 48px;
         font-weight: 400;
         color: #fff;
+
         //border-bottom: 8px solid #fffff2;
         .nameBx {
             width: 100%;
@@ -544,7 +545,51 @@ section {
             text-decoration: none;
         }
     }
+
+    .btnUIBx {
+        display: flex;
+
+        .btnBx {
+            button {
+                font-size: 24px;
+                font-weight: 700;
+                background-color: #333;
+                color: #fff;
+            }
+        }
+    }
+
+    .contingentBx {
+        display: flex;
+
+        .teamBx button,
+        .bagTagBx button {
+            width: 100px;
+            font-size: 24px;
+            font-weight: 700;
+            background-color: #333;
+            color: #fff;
+        }
+    }
+
+    .mainBx {
+        display: flex;
+
+        .teamInfoBx {
+            height: 80vh;
+
+            .teamComposeBx {
+                display: flex;
+                flex-direction: row;
+                justify-content: space-around;
+                border: 2px solid #e91e63;
+
+                .locationBx {}
+            }
+        }
+    }
 }
+
 
 @media (max-width: 768px) {
     section {
