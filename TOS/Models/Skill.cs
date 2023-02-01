@@ -11,5 +11,8 @@ namespace TOS.Models
         public string Skillname { get; set; }
         public bool Inherent { get; set; }
         public int? Cardid { get; set; }
+        public string Skillact { get; set; }
+        public double? Skillint { get; set; }
+        public string Skilldesc { get; set; }
     }
 }

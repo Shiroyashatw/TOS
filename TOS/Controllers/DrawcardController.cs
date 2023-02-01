@@ -7,6 +7,7 @@ using Microsoft.AspNetCore.Mvc;
 using static TOS.Controllers.LoginController;
 using System.Collections.Generic;
 using TOS.Models;
+using TOS.Dtos;
 
 namespace TOS.Controllers
 {
@@ -34,8 +35,11 @@ namespace TOS.Controllers
         [HttpGet]
         public List<DataModel> Test()
         {
+            DrawCardList drawCardList = new DrawCardList();
+
             List<DataModel> datalist = new List<DataModel>();
 
+            // 宣告一個 List 接 稀有度卡池
             List<string> list = new List<string>();
 
             // 稀有度權重
@@ -44,10 +48,6 @@ namespace TOS.Controllers
             int ssr = 10;
 
 
-            //var rlist = (from c in _db.Cards
-            //             where c.Cardrare == "R"
-            //             select c).ToList();
-            // rlist.ToList()[0].Cardrare = "R"
             List<int> skilllist = new List<int> { 1, 2, 3, 4, 5, 6, 10, 20 };
 
             var random = new Random();
@@ -72,14 +72,14 @@ namespace TOS.Controllers
                 int sskill;
                 string rare = list[index];
 
-                int cardid = Rare(rare);
+                var cardid = Rare(rare);
 
                 fskill = random.Next(skilllist.Count);
                 sskill = random.Next(skilllist.Count);
 
                 datalist.Add(new DataModel
                 {
-                    cardid = cardid,
+                    //cardid = cardid,
                     firstSkill = skilllist[fskill],
                     firstSkillLv = 1,
                     secondSkill = skilllist[sskill],
@@ -90,9 +90,13 @@ namespace TOS.Controllers
             // return new string[] { y };
             return datalist;
         }
-        
-        private int Rare(string rare)
+        // 傳入抽到的稀有度 傳回 對應稀有度 隨機 Cardid
+        private List<Card> Rare(string rare)
         {
+            var res = (from r in _db.Cards
+                      where r.Cardrare == rare
+                      select r).ToList();
+            //res = res.OrderBy(a => Guid.NewGuid()).FirstOrDefault();
             var rareList = (from c in _db.Cards
                             where c.Cardrare == rare
                             select c).ToList();
@@ -103,7 +107,7 @@ namespace TOS.Controllers
 
             int cardid = rareList[index].Cardid;
 
-            return cardid;
+            return res;
         }
     }
 }

@@ -22,14 +22,10 @@ namespace TOS.Models
         public virtual DbSet<Skill> Skills { get; set; }
         public virtual DbSet<User> Users { get; set; }
 
-//        protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)
-//        {
-//            if (!optionsBuilder.IsConfigured)
-//            {
-//#warning To protect potentially sensitive information in your connection string, you should move it out of source code. You can avoid scaffolding the connection string by using the Name= syntax to read it from configuration - see https://go.microsoft.com/fwlink/?linkid=2131148. For more guidance on storing connection strings, see http://go.microsoft.com/fwlink/?LinkId=723263.
-//                optionsBuilder.UseSqlServer("Server=.\\sqlexpress;Database=TosDB;Integrated Security=True;");
-//            }
-//        }
+        protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)
+        {
+            
+        }
 
         protected override void OnModelCreating(ModelBuilder modelBuilder)
         {
@@ -38,6 +34,14 @@ namespace TOS.Models
                 entity.ToTable("Card");
 
                 entity.Property(e => e.Cardid).HasColumnName("cardid");
+
+                entity.Property(e => e.Attri)
+                    .HasMaxLength(10)
+                    .HasColumnName("attri");
+
+                entity.Property(e => e.BigImg)
+                    .HasMaxLength(30)
+                    .HasColumnName("bigImg");
 
                 entity.Property(e => e.Cardrare)
                     .IsRequired()
@@ -48,6 +52,14 @@ namespace TOS.Models
                     .IsRequired()
                     .HasMaxLength(50)
                     .HasColumnName("cradName");
+
+                entity.Property(e => e.LittleImg)
+                    .HasMaxLength(30)
+                    .HasColumnName("littleImg");
+
+                entity.Property(e => e.Race)
+                    .HasMaxLength(10)
+                    .HasColumnName("race");
             });
 
             modelBuilder.Entity<Item>(entity =>
@@ -61,6 +73,8 @@ namespace TOS.Models
                 entity.Property(e => e.Firstskill).HasColumnName("firstskill");
 
                 entity.Property(e => e.FirstskillLv).HasColumnName("firstskillLv");
+
+                entity.Property(e => e.Itemstate).HasColumnName("itemstate");
 
                 entity.Property(e => e.Secondskill).HasColumnName("secondskill");
 
@@ -76,16 +90,28 @@ namespace TOS.Models
                 entity.ToTable("Skill");
 
                 entity.Property(e => e.Skillname)
-                    .HasMaxLength(50)
+                    .HasMaxLength(10)
                     .HasColumnName("skillname");
 
                 entity.Property(e => e.Cardid).HasColumnName("cardid");
 
                 entity.Property(e => e.Inherent).HasColumnName("inherent");
 
+                entity.Property(e => e.Skillact)
+                    .HasMaxLength(2)
+                    .HasColumnName("skillact")
+                    .IsFixedLength(true);
+
+                entity.Property(e => e.Skilldesc)
+                    .IsRequired()
+                    .HasMaxLength(50)
+                    .HasColumnName("skilldesc");
+
                 entity.Property(e => e.Skillid)
                     .ValueGeneratedOnAdd()
                     .HasColumnName("skillid");
+
+                entity.Property(e => e.Skillint).HasColumnName("skillint");
             });
 
             modelBuilder.Entity<User>(entity =>

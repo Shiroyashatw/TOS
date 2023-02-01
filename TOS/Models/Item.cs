@@ -14,5 +14,6 @@ namespace TOS.Models
         public int FirstskillLv { get; set; }
         public int Secondskill { get; set; }
         public int SecondskillLv { get; set; }
+        public bool Itemstate { get; set; }
     }
 }

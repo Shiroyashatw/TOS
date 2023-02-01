@@ -10,5 +10,9 @@ namespace TOS.Models
         public int Cardid { get; set; }
         public string CradName { get; set; }
         public string Cardrare { get; set; }
+        public string Race { get; set; }
+        public string Attri { get; set; }
+        public string BigImg { get; set; }
+        public string LittleImg { get; set; }
     }
 }
