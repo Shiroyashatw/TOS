@@ -5,6 +5,10 @@ body {
   overflow-x: hidden;
 }
 
+::-webkit-scrollbar {
+  display: none;
+}
+
 .container {
   max-width: 1920px;
 }
@@ -359,6 +363,7 @@ section .contentBx .formBx .remember input[type=checkbox] {
   width: 100%;
   height: 100vh;
   box-sizing: border-box;
+  overflow: hidden;
 }
 .playerpage .headerBx {
   width: 100%;
@@ -471,16 +476,63 @@ section .contentBx .formBx .remember input[type=checkbox] {
 }
 .playerpage .mainBx {
   display: flex;
-}
-.playerpage .mainBx .teamInfoBx {
-  height: 80vh;
+  height: 75vh;
 }
 .playerpage .mainBx .teamInfoBx .teamComposeBx {
+  margin: 0;
+  padding: 0;
   display: flex;
   flex-direction: row;
-  justify-content: space-around;
   border: 2px solid #e91e63;
 }
+.playerpage .mainBx .teamInfoBx .teamComposeBx .locationBx {
+  text-align: center;
+  margin: 1rem 0.8rem 0 0.8rem;
+}
+.playerpage .mainBx .teamInfoBx .teamComposeBx .locationBx .littleCardImgBX {
+  width: 96px;
+  height: 96px;
+  border: 2px solid #ff4584;
+}
+.playerpage .mainBx .teamInfoBx .cardInfoBx {
+  display: flex;
+}
+.playerpage .mainBx .teamInfoBx .cardInfoBx .cardImgBx {
+  border: 2px solid #03a9f4;
+  text-align: center;
+}
+.playerpage .mainBx .teamInfoBx .cardInfoBx .cardImgBx img {
+  width: 80%;
+  -o-object-fit: cover;
+     object-fit: cover;
+}
+.playerpage .mainBx .teamInfoBx .cardMsgBx {
+  border: 2px solid #028f76;
+}
+.playerpage .mainBx .teamInfoBx .cardMsgBx .cardtextBx {
+  padding: 5px 0 0 10px;
+}
+.playerpage .mainBx .teamInfoBx .cardMsgBx .cardtextBx button {
+  margin: 0 2px;
+  color: #fff;
+  background-color: #333;
+  border-radius: 5px;
+}
+.playerpage .mainBx .bagBx {
+  display: flex;
+  flex-wrap: wrap;
+  overflow: auto;
+  flex-direction: row;
+  justify-content: space-between;
+  border: 2px solid #9e0c39;
+}
+.playerpage .mainBx .bagBx .bagitemBx {
+  margin: 0.5rem;
+  width: 96px;
+  height: 96px;
+  border: 1px solid #03a9f4;
+}
+
 @media (max-width: 768px) {
   section .imgBx {
     position: absolute;
