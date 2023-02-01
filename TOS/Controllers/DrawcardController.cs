@@ -91,12 +91,12 @@ namespace TOS.Controllers
             return datalist;
         }
         // 傳入抽到的稀有度 傳回 對應稀有度 隨機 Cardid
-        private List<Card> Rare(string rare)
+        private ActionResult<IEnumerable<Card>> Rare(string rare)
         {
             var res = (from r in _db.Cards
                       where r.Cardrare == rare
-                      select r).ToList();
-            //res = res.OrderBy(a => Guid.NewGuid()).FirstOrDefault();
+                      select r).ToList().OrderBy(a => Guid.NewGuid()).FirstOrDefault();
+            
             var rareList = (from c in _db.Cards
                             where c.Cardrare == rare
                             select c).ToList();
@@ -107,7 +107,7 @@ namespace TOS.Controllers
 
             int cardid = rareList[index].Cardid;
 
-            return res;
+            return Ok(res);
         }
     }
 }
