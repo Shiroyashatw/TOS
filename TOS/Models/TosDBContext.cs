@@ -134,6 +134,12 @@ namespace TOS.Models
                     .HasColumnName("token")
                     .IsFixedLength(true);
 
+                entity.Property(e => e.UserMagicstone).HasColumnName("user_magicstone");
+
+                entity.Property(e => e.UserMoney).HasColumnName("user_money");
+
+                entity.Property(e => e.UserSoul).HasColumnName("user_soul");
+
                 entity.Property(e => e.Userid)
                     .ValueGeneratedOnAdd()
                     .HasColumnName("userid");

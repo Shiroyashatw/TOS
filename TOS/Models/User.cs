@@ -12,5 +12,8 @@ namespace TOS.Models
         public string Password { get; set; }
         public string Username { get; set; }
         public string Token { get; set; }
+        public int UserMoney { get; set; }
+        public int UserSoul { get; set; }
+        public int UserMagicstone { get; set; }
     }
 }

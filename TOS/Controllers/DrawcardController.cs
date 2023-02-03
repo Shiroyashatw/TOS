@@ -8,11 +8,13 @@ using static TOS.Controllers.LoginController;
 using System.Collections.Generic;
 using TOS.Models;
 using TOS.Dtos;
+using Microsoft.AspNetCore.Authorization;
 
 namespace TOS.Controllers
 {
     [Route("api/[controller]")]
     [ApiController]
+    [AllowAnonymous]
     public class DrawcardController : ControllerBase
     {
         private readonly TosDBContext _db;
@@ -23,21 +25,21 @@ namespace TOS.Controllers
             _db = db;
             _contextAccessor = contextAccessor;
         }
-
-        public class DataModel
+        [HttpGet("id")]
+        public ActionResult<DrawCardListDto> DrawCard(int id)
         {
-            public int cardid { get; set; }
-            public int firstSkill { get; set; }
-            public int firstSkillLv { get; set; }
-            public int secondSkill { get; set; }
-            public int secondSkillLv { get; set; }
-        }
-        [HttpGet]
-        public List<DataModel> Test()
-        {
-            DrawCardList drawCardList = new DrawCardList();
-
-            List<DataModel> datalist = new List<DataModel>();
+            var user = (from u in _db.Users
+                       where u.Userid == id
+                       select u).FirstOrDefault();
+            
+            // 後端讀取當玩家石頭不夠返回前端
+            if(user.UserMagicstone < 50)
+            {
+                return NotFound("魔法石不足十連抽");
+            }
+            
+            // 回傳抽到的卡片列表
+            List<DrawCardListDto> drawCardList = new List<DrawCardListDto>();
 
             // 宣告一個 List 接 稀有度卡池
             List<string> list = new List<string>();
@@ -46,9 +48,6 @@ namespace TOS.Controllers
             int r = 160;
             int sr = 30;
             int ssr = 10;
-
-
-            List<int> skilllist = new List<int> { 1, 2, 3, 4, 5, 6, 10, 20 };
 
             var random = new Random();
 
@@ -65,49 +64,71 @@ namespace TOS.Controllers
                 list.Add("SSR");
             }
 
+            // 進行抽卡循環
             for (int i = 0; i < 10; i++)
             {
                 int index = random.Next(list.Count);
-                int fskill;
-                int sskill;
+
                 string rare = list[index];
 
-                var cardid = Rare(rare);
+                var CardList = Rare(rare);
+                // var attri = CardList.Value.Attri;
+                var SkillList = Skill(CardList.Value.Cardid);
 
-                fskill = random.Next(skilllist.Count);
-                sskill = random.Next(skilllist.Count);
+                // SkillList.Value[0].skillname
 
-                datalist.Add(new DataModel
+                drawCardList.Add(new DrawCardListDto
                 {
-                    //cardid = cardid,
-                    firstSkill = skilllist[fskill],
-                    firstSkillLv = 1,
-                    secondSkill = skilllist[sskill],
-                    secondSkillLv = 1,
+                    Cardid = CardList.Value.Cardid,
+                    CradName = CardList.Value.CradName,
+                    Cardrare = CardList.Value.Cardrare,
+                    Race = CardList.Value.Race,
+                    Attri = CardList.Value.Attri,
+                    FirskillName = SkillList.Value[0].Skillname,
+                    SecondSkillName = SkillList.Value[1].Skillname,
+                    BigImg= CardList.Value.BigImg,
+                    LittleImg= CardList.Value.LittleImg,
                 });
-            }
 
-            // return new string[] { y };
-            return datalist;
+                Item insert = new Item
+                {
+                    Userid = user.Userid,
+                    Cardid = CardList.Value.Cardid,
+                    Firstskill = SkillList.Value[0].Skillid,
+                    FirstskillLv = 1,
+                    Secondskill = SkillList.Value[1].Skillid,
+                    SecondskillLv = 1,
+                    Itemstate = true
+                };
+                _db.Items.Add(insert);
+                
+            }
+            user.UserMagicstone = user.UserMagicstone - 50;
+            _db.SaveChanges();
+            
+            return Ok(drawCardList);
         }
-        // 傳入抽到的稀有度 傳回 對應稀有度 隨機 Cardid
-        private ActionResult<IEnumerable<Card>> Rare(string rare)
+        // 傳入抽到的稀有度 傳回 對應稀有度的卡片資訊
+        private ActionResult<Card> Rare(string rare)
         {
             var res = (from r in _db.Cards
                       where r.Cardrare == rare
-                      select r).ToList().OrderBy(a => Guid.NewGuid()).FirstOrDefault();
+                      select r).ToList();
             
-            var rareList = (from c in _db.Cards
-                            where c.Cardrare == rare
-                            select c).ToList();
-            // (偽)隨機亂數
-            var random = new Random();
+            var x = res.OrderBy(a => Guid.NewGuid()).FirstOrDefault();
+            
+            return x;
+        }
+        // 抽取技能列表 傳入卡片ID
+        private ActionResult<List<Skill>> Skill(int id)
+        {
+            var res = (from s in _db.Skills
+                       where s.Inherent == false || s.Cardid == id
+                       select s);
 
-            int index = random.Next(rareList.Count);
+            var x = res.OrderBy(a => Guid.NewGuid()).Take(2).ToList();
 
-            int cardid = rareList[index].Cardid;
-
-            return Ok(res);
+            return x;
         }
     }
 }
