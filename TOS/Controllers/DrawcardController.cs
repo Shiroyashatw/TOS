@@ -14,7 +14,6 @@ namespace TOS.Controllers
 {
     [Route("api/[controller]")]
     [ApiController]
-    [AllowAnonymous]
     public class DrawcardController : ControllerBase
     {
         private readonly TosDBContext _db;

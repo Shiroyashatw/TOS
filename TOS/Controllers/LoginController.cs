@@ -66,8 +66,8 @@ namespace TOS.Controllers
                 var claims = new List<Claim>
                 {
                     // 可自行設定 其他Controller地方可以相對使用
-                    new Claim(ClaimTypes.Name, user.Account),
-                    new Claim("FullName", user.Username)
+                    new Claim("UserAccount", user.Account),
+                    new Claim("UserName", user.Username),
                 };
 
                 // 登入期限控制

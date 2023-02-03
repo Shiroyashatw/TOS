@@ -26,7 +26,7 @@ namespace TOS.Controllers
         {
             var Claim = _contextAccessor.HttpContext.User.Claims.ToList();
 
-            var username = Claim.Where(a => a.Type == "FullName").First().Value;
+            var username = Claim.Where(a => a.Type == "UserName").First().Value;
 
             var res = from u in _db.Users
                       where u.Username == username
