@@ -17,7 +17,9 @@ namespace TOS.Models
         {
         }
 
+        public virtual DbSet<AttrTable> AttrTables { get; set; }
         public virtual DbSet<Card> Cards { get; set; }
+        public virtual DbSet<CardListTable> CardListTables { get; set; }
         public virtual DbSet<Item> Items { get; set; }
         public virtual DbSet<Skill> Skills { get; set; }
         public virtual DbSet<User> Users { get; set; }
@@ -29,6 +31,27 @@ namespace TOS.Models
 
         protected override void OnModelCreating(ModelBuilder modelBuilder)
         {
+            modelBuilder.Entity<AttrTable>(entity =>
+            {
+                entity.HasKey(e => e.AttrName);
+
+                entity.ToTable("AttrTable");
+
+                entity.Property(e => e.AttrName)
+                    .HasMaxLength(10)
+                    .HasColumnName("attr_Name")
+                    .IsFixedLength(true);
+
+                entity.Property(e => e.AttrId)
+                    .ValueGeneratedOnAdd()
+                    .HasColumnName("attr_id");
+
+                entity.Property(e => e.AttrImg)
+                    .IsRequired()
+                    .HasMaxLength(25)
+                    .HasColumnName("attr_Img");
+            });
+
             modelBuilder.Entity<Card>(entity =>
             {
                 entity.ToTable("Card");
@@ -60,6 +83,26 @@ namespace TOS.Models
                 entity.Property(e => e.Race)
                     .HasMaxLength(10)
                     .HasColumnName("race");
+            });
+
+            modelBuilder.Entity<CardListTable>(entity =>
+            {
+                entity.HasKey(e => e.CardName);
+
+                entity.ToTable("CardListTable");
+
+                entity.Property(e => e.CardName)
+                    .HasMaxLength(30)
+                    .HasColumnName("card_name");
+
+                entity.Property(e => e.CardId)
+                    .ValueGeneratedOnAdd()
+                    .HasColumnName("card_id");
+
+                entity.Property(e => e.CardImg)
+                    .IsRequired()
+                    .HasMaxLength(50)
+                    .HasColumnName("card_img");
             });
 
             modelBuilder.Entity<Item>(entity =>

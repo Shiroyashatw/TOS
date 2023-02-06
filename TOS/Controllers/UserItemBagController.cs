@@ -1,7 +1,9 @@
 ﻿using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
+using System.Collections.Generic;
 using System.Linq;
+using TOS.Dtos;
 using TOS.Models;
 
 namespace TOS.Controllers
@@ -27,9 +29,37 @@ namespace TOS.Controllers
 
             
             var res = (from item in _db.Items
+                      join c in _db.Cards
+                      on item.Cardid equals c.Cardid
+                      join a in _db.AttrTables
+                      on c.Attri equals a.AttrName
                       where item.Userid == id
-                      select item).ToList();
+                      select new
+                      {
+                          Cardid = item.Cardid,
+                          CardName = c.CradName,
+                          BigImg = c.BigImg,
+                          LittleImg = c.LittleImg,
+                          AttriImg = a.AttrImg,
+                          FirstSkillName = (from s in _db.Skills
+                                            where s.Skillid == item.Firstskill
+                                            select s.Skillname
+                                             ).FirstOrDefault(),
+                          SecondSkillName = (from s in _db.Skills
+                                             where s.Skillid == item.Secondskill
+                                             select s.Skillname).FirstOrDefault(),
+                      }).ToList();
+            
+            //List<ItemBagDto> itemBags = new List<ItemBagDto>();
 
+            //foreach (var item in res)
+            //{
+            //    itemBags.Add(new ItemBagDto
+            //    {
+            //        Cardid = item.Cardid,
+                   
+            //    });
+            //}
             return Ok(res);
         }
     }
