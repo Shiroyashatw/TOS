@@ -55,7 +55,7 @@
             </div>
         </nav>
 
-        <div class="formBx mt-2">
+        <div class="formBx mt-2" id="app">
             <form>
                 <div id="radio">
                     <p>UID:</p>
@@ -65,11 +65,13 @@
                     <label for="">使用目的:</label>
                     <label><input type="radio" name="" value=""><span class="round button">純贈送</span></label>
                     <label><input type="radio" name="" value=""><span class="round button">找人交換</span></label>
-                    <div class="checkBx">
-                        <input type="checkbox" id="img1" name="card" value="凱薩">
-                        <label class="col-1" for="img1"><img src="img/little/10310.png" alt=""></label>
+                    <div class="checkBx" v-for="item in data.carddata">
+                        <input type="checkbox" v-bind:id="item.cardId" name="card" value="{{item.cardId}}">
+                        <label class="col-1" for="item.id"><img v-bind:src="item.cardImg" alt=""></label>
+                        <!-- <img v-bind:src="item.cardImg" alt=""> -->
+                        <!-- <label class="col-1" for="img1"><img src="img/little/10310.png" alt=""></label>
                         <input type="checkbox" id="img2" name="card" value="伊莉絲">
-                        <label class="col-1" for="img2"><img src="img/little/10047.PNG" alt=""></label>
+                        <label class="col-1" for="img2"><img src="img/little/10047.PNG" alt=""></label> -->
                     </div>
                     
                     <button type="button" id="btnSend">送出</button>
@@ -157,12 +159,12 @@
                     </div>
                 </div>
             </div> -->
-            <div class="bagBx col-6" id="app">
-                <div class="bagitemBx" v-for="item in data.carddata">
+            <div class="bagBx col-6">
+                <div class="bagitemBx">
                     <!-- <div class="backgroundImgBx">
                         <img v-bind:src="item.attriImg" v-bind:realimg="item.littleImg" alt="" onclick="getsrc(this)">
                     </div> -->
-                    <img v-bind:src="item.cardImg" @click="plus" alt="">
+                    <!-- <img v-bind:src="item.cardImg" @click="plus" alt=""> -->
                 </div>
             </div>
         </div>
@@ -187,37 +189,37 @@
         })
       </script> -->
     <script>
-        // const { reactive, onBeforeMount } = Vue;
-        // const url = '/api/CardList'
+        const { reactive, onBeforeMount } = Vue;
+        const url = '/api/CardList'
 
-        // const App = {
-        //     setup() {
-        //         const data = reactive({
-        //             carddata: '',
-        //         })
-        //         onBeforeMount(() => {
-        //             axios.get(url).then(
-        //                 res => {
-        //                     console.log(res.data)
-        //                     data.carddata = res.data
-        //                 }
-        //             ).catch(err => {
-        //                 console.log(err)
-        //             })
-        //         })
-        //         // console.log(data)
-        //         return { data };
-        //     },
-        //     methods: {
-        //         plus: (event) => {
-        //             console.log(event.target.tagName);
-        //         }
-        //     }
-        // };
+        const App = {
+            setup() {
+                const data = reactive({
+                    carddata: '',
+                })
+                onBeforeMount(() => {
+                    axios.get(url).then(
+                        res => {
+                            console.log(res.data)
+                            data.carddata = res.data
+                        }
+                    ).catch(err => {
+                        console.log(err)
+                    })
+                })
+                // console.log(data)
+                return { data };
+            },
+            methods: {
+                plus: (event) => {
+                    console.log(event.target.tagName);
+                }
+            }
+        };
 
 
-        // //console.log(data)
-        // const myVue = Vue.createApp(App).mount("#app")
+        //console.log(data)
+        const myVue = Vue.createApp(App).mount("#app")
 
     </script>
     <script>
