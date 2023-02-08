@@ -72,7 +72,8 @@ body {
 .middle-info .battle-info #start {
   font-size: 48px;
   font-weight: 900;
-  writing-mode: vertical-lr;
+  -ms-writing-mode: tb-lr;
+      writing-mode: vertical-lr;
   border: 0;
   background: rgba(0, 0, 0, 0);
   color: rgb(245, 244, 232);
@@ -82,7 +83,8 @@ body {
   font-size: 64px;
   letter-spacing: 1rem;
   font-weight: 900;
-  writing-mode: vertical-lr;
+  -ms-writing-mode: tb-lr;
+      writing-mode: vertical-lr;
   color: #fff;
 }
 .middle-info .test-img {
@@ -607,6 +609,7 @@ section .contentBx .formBx .remember input[type=checkbox] {
   -webkit-touch-callout: none;
   -webkit-user-select: none;
   -moz-user-select: none;
+  -ms-user-select: none;
   user-select: none;
 }
 .checkBx label::before {

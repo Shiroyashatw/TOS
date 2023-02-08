@@ -57,15 +57,11 @@
             <form>
                 <div id="radio">
                     <div class="inputBx col-12">
-                        <label for="">UID:</label>
-                        <input type="text">
+                        <label for="Backup">是否為回鍋帳號:</label>
+                        <label><input type="radio" name="Backup" value="true"><span class="round button">是</span></label>
+                        <label><input type="radio" name="Backup" value="false"><span class="round button">否</span></label>
                     </div>
-                    <div class="inputBx col-12">
-                        <label for="">是否為回鍋帳號:</label>
-                        <label><input type="radio" name="Backup" value="0"><span class="round button">是</span></label>
-                        <label><input type="radio" name="Backup" value="1"><span class="round button">否</span></label>
-                    </div>
-                     <!-- 摺疊 -->
+                    <!-- 摺疊 -->
                     <p>
                         <a class="btn btn-primary" data-bs-toggle="collapse" href="#multiCollapseExample1" role="button"
                             aria-expanded="false" aria-controls="multiCollapseExample1">一抽進化抽中列表</a>
@@ -80,29 +76,44 @@
                         <!-- 摺疊列表 -->
                         <div class="col-12">
                             <div class="collapse multi-collapse" id="multiCollapseExample1">
+                                <h2>請設定帳號一抽列表</h2>
                                 <div class="checkBx">
                                     <div class="itemBx" v-for="item in data.carddata">
-                                        <input type="checkbox" class="chose" :text="'list'+item.cardName" v-bind:id="item.cardId" v-model="group"
-                                            name="card" v-bind:value="item.cardId" :disabled="group.length >= max && group.indexOf(item.cardId) === -1">
+                                        <input type="checkbox" class="chose" :text="'list'+item.cardName"
+                                            v-bind:id="item.cardId" v-model="group" name="card"
+                                            v-bind:value="item.cardId"
+                                            :disabled="group.length >= max && group.indexOf(item.cardId) === -1">
                                         <label class="col-1" :for="item.cardId"><img v-bind:src="item.cardImg"
                                                 alt="">Item {{item.cardId}}</label>
                                     </div>
                                 </div>
                             </div>
                         </div>
-                        <!-- <div class="col">
-                          <div class="collapse multi-collapse" id="multiCollapseExample2">
-                            <div class="card card-body">
-                              Some placeholder content for the second collapse component of this multi-collapse example. This panel is hidden by default but revealed when the user activates the relevant trigger.
+                        <div class="col">
+                            <div class="collapse multi-collapse" id="multiCollapseExample2">
+                                <div class="checkBx">
+                                    <div class="itemBx" v-for="wantitem in data.carddata">
+                                        <input type="checkbox" class="chose" :text="'list'+wantitem.cardName"
+                                            v-bind:id="'want'+wantitem.cardId" v-model="wantgroup" name="wantcard"
+                                            v-bind:value="wantitem.cardId"
+                                            :disabled="wantgroup.length >= max && wantgroup.indexOf(wantitem.cardId) === -1">
+                                        <label class="col-1" :for="'want'+wantitem.cardId"><img
+                                                v-bind:src="wantitem.cardImg" alt="">Item {{wantitem.cardId}}</label>
+                                    </div>
+                                </div>
                             </div>
-                          </div>
-                        </div> -->
+                        </div>
                     </div>
                     <!-- 摺疊 -->
-
+                    <div class="mb-3">
+                        <label for="accountInfo" class="form-label">備註:(可輸入聯絡管道如巴哈、ptt站內等等)</label>
+                        <textarea class="form-control" id="accountInfo" rows="3" maxlength="100"
+                            name="accountInfo"></textarea>
+                    </div>
                     <div v-for="x in group">
                         {{x}}
                     </div>
+                    <div>{{wantgroup}}</div>
                     <button type="button" id="btnSend" class="btn btn-primary">送出</button>
                 </div>
             </form>
@@ -123,7 +134,7 @@
         })
       </script> -->
     <script>
-        const { ref,reactive, onBeforeMount } = Vue;
+        const { ref, reactive, onBeforeMount } = Vue;
         const url = '/api/CardList'
 
         const App = {
@@ -132,6 +143,7 @@
                     carddata: '',
                 })
                 const group = ref([])
+                const wantgroup = ref([])
                 const max = 5
                 onBeforeMount(() => {
                     axios.get(url).then(
@@ -144,7 +156,7 @@
                     })
                 })
                 console.log(group)
-                return { data,group,max };
+                return { data, group, wantgroup, max };
             },
             methods: {
                 plus: (event) => {
@@ -162,13 +174,44 @@
 
         $('#btnSend').on('click', function () {
             let resArray = [];
+            let wantresArray = [];
             $('input:checkbox[name=card]:checked').each(function () {
                 let res = $(this).val()
                 resArray.push(res)
 
                 // add $(this).val() to your array
             });
+            $('input:checkbox[name=wantcard]:checked').each(function () {
+                let wantres = $(this).val()
+                wantresArray.push(wantres)
+
+                // add $(this).val() to your array
+            });
+            let BackupVal = $('input[name="Backup"]:checked').val()
+            if(BackupVal == "true"){
+                BackupVal = true
+            }
+            else {
+                BackupVal = false
+            }
+            console.log(c)
             console.log(resArray)
+            console.log(wantresArray)
+            axios({
+                method: 'post',
+                url: '/api/User',
+                data: {
+                    Backup: BackupVal,
+                    card: resArray,
+                    wantcard: wantresArray,
+                    accountInfo: $('input[name="accountInfo"]').val(),
+                }
+            }).then(res => {
+                console.log("Y")
+                console.log(res)
+            }).catch(err => {
+                console.log(err)
+            })
         })
     </script>
 </body>

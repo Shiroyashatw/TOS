@@ -23,8 +23,10 @@ namespace TOS.Controllers
         }
         public partial class ChoseCard
         {
-            public string Name { get; set; }
-            public string[] Chose { get; set; }
+            public bool Backup { get; set; }
+            public int[] card { get; set; }
+            public int[] wantcard { get; set; }
+            public string accountInfo { get; set; }
         }
         [HttpGet]
         public async Task<ActionResult<IEnumerable<dynamic>>> GetInfo()
@@ -43,6 +45,7 @@ namespace TOS.Controllers
         [HttpPost]
         public ActionResult<ChoseCard> PostData(ChoseCard choseCard)
         {
+            ChoseCard card = new ChoseCard { };
             return Content("123");
         }
     }
