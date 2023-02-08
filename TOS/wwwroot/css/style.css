@@ -72,8 +72,7 @@ body {
 .middle-info .battle-info #start {
   font-size: 48px;
   font-weight: 900;
-  -ms-writing-mode: tb-lr;
-      writing-mode: vertical-lr;
+  writing-mode: vertical-lr;
   border: 0;
   background: rgba(0, 0, 0, 0);
   color: rgb(245, 244, 232);
@@ -83,8 +82,7 @@ body {
   font-size: 64px;
   letter-spacing: 1rem;
   font-weight: 900;
-  -ms-writing-mode: tb-lr;
-      writing-mode: vertical-lr;
+  writing-mode: vertical-lr;
   color: #fff;
 }
 .middle-info .test-img {
@@ -594,6 +592,10 @@ section .contentBx .formBx .remember input[type=checkbox] {
     background: rgba(255, 255, 255, 0.8);
   }
 }
+.checkBx {
+  display: flex;
+  flex-wrap: wrap;
+}
 .checkBx label {
   margin: 0;
   width: 100px;
@@ -605,7 +607,6 @@ section .contentBx .formBx .remember input[type=checkbox] {
   -webkit-touch-callout: none;
   -webkit-user-select: none;
   -moz-user-select: none;
-  -ms-user-select: none;
   user-select: none;
 }
 .checkBx label::before {
@@ -636,4 +637,8 @@ section .contentBx .formBx .remember input[type=checkbox] {
   transform: scale(0.85);
   z-index: -1;
   opacity: 1;
+}
+
+.inputBx {
+  margin: 1rem 0;
 }/*# sourceMappingURL=style.css.map */

@@ -21,6 +21,11 @@ namespace TOS.Controllers
             _db = db;
             _contextAccessor = contextAccessor;
         }
+        public partial class ChoseCard
+        {
+            public string Name { get; set; }
+            public string[] Chose { get; set; }
+        }
         [HttpGet]
         public async Task<ActionResult<IEnumerable<dynamic>>> GetInfo()
         {
@@ -35,7 +40,10 @@ namespace TOS.Controllers
             return await res.ToListAsync();
 
         }
-
-
+        [HttpPost]
+        public ActionResult<ChoseCard> PostData(ChoseCard choseCard)
+        {
+            return Content("123");
+        }
     }
 }

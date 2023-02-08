@@ -725,6 +725,8 @@ section {
 }
 
 .checkBx {
+    display: flex;
+    flex-wrap: wrap;
     label {
         margin: 0;
         width: 100px;
@@ -785,4 +787,8 @@ section {
         z-index: -1;
         opacity: 1;
     }
+}
+
+.inputBx {
+    margin: 1rem 0;
 }

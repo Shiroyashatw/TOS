@@ -22,11 +22,9 @@
     <link rel="stylesheet" href="css/style.css">
 
     <style>
-        input[type="checkbox"][id^="img"] {
+        .checkBx input[type="checkbox"] {
             display: none;
         }
-
-        
     </style>
 </head>
 
@@ -58,123 +56,29 @@
         <div class="formBx mt-2" id="app">
             <form>
                 <div id="radio">
-                    <p>UID:</p>
-                    <label for="">是否為回鍋帳號:</label>
-                    <label><input type="radio" name="label" value=""><span class="round button">是</span></label>
-                    <label><input type="radio" name="label" value=""><span class="round button">否</span></label>
-                    <label for="">使用目的:</label>
-                    <label><input type="radio" name="" value=""><span class="round button">純贈送</span></label>
-                    <label><input type="radio" name="" value=""><span class="round button">找人交換</span></label>
-                    <div class="checkBx" v-for="item in data.carddata">
-                        <input type="checkbox" v-bind:id="item.cardId" name="card" value="{{item.cardId}}">
-                        <label class="col-1" for="item.id"><img v-bind:src="item.cardImg" alt=""></label>
-                        <!-- <img v-bind:src="item.cardImg" alt=""> -->
-                        <!-- <label class="col-1" for="img1"><img src="img/little/10310.png" alt=""></label>
-                        <input type="checkbox" id="img2" name="card" value="伊莉絲">
-                        <label class="col-1" for="img2"><img src="img/little/10047.PNG" alt=""></label> -->
+                    <div class="inputBx col-12">
+                        <label for="">UID:</label>
+                        <input type="text">
                     </div>
-                    
-                    <button type="button" id="btnSend">送出</button>
+                    <div class="inputBx col-12">
+                        <label for="">是否為回鍋帳號:</label>
+                        <label><input type="radio" name="Backup" value="0"><span class="round button">是</span></label>
+                        <label><input type="radio" name="Backup" value="1"><span class="round button">否</span></label>
+                    </div>
+                    <div class="checkBx">
+                        <div class="itemBx" v-for="item in data.carddata">
+                            <input type="checkbox" class="chose" v-bind:id="item.cardId" v-model="group" name="card"
+                                v-bind:value="item.cardId">
+                            <label class="col-1" :for="item.cardId"><img v-bind:src="item.cardImg" alt=""></label>
+                        </div>
+                    </div>
+                    <div>group = ${group}</div>
+                    <button type="button" id="btnSend" class="btn btn-primary">送出</button>
                 </div>
             </form>
         </div>
     </div>
-    <div class="playerpage container-fluid">
 
-        <!-- <div class="headerBx">
-            <div class="nameBx row">
-                <span id="username" class="col-3"></span>
-                <span class="col-3">金幣:213123132123</span>
-                <span class="col-3">魔法石:2020</span>
-                <span class="col-3"><button id="LoginOut">登出</button></span>
-            </div>
-        </div> -->
-        <!-- <div class="btnUIBx mt-3">
-            <div class="btnBx col-9">
-                <button>隊伍編成</button>
-                <button>隊伍總攬</button>
-            </div>
-            <div class="btnBx col-3 text-end pe-5">
-                <button>返回主頁</button>
-            </div>
-        </div> -->
-
-        <div class="mainBx">
-            <!-- <div class="teamInfoBx col-6">
-                <div class="teamComposeBx  h-50">
-                    <div class="locationBx">
-                        <h2>大將</h2>
-                        <div class="littleCardImgBX">
-                            <img src="" alt="">
-                        </div>
-                    </div>
-                    <div class="locationBx">
-                        <h2>副將</h2>
-                        <div class="littleCardImgBX">
-                            <img src="" alt="">
-                        </div>
-                    </div>
-                    <div class="locationBx">
-                        <h2>中堅</h2>
-                        <div class="littleCardImgBX">
-                            <img src="" alt="">
-                        </div>
-                    </div>
-                    <div class="locationBx">
-                        <h2>次鋒</h2>
-                        <div class="littleCardImgBX">
-                            <img src="" alt="">
-                        </div>
-                    </div>
-                    <div class="locationBx">
-                        <h2>先鋒</h2>
-                        <div class="littleCardImgBX">
-                            <img src="" alt="">
-                        </div>
-                    </div>
-                </div>
-                <div class="cardInfoBx h-50">
-                    <div class="cardImgBx col-5">
-                        <img id="show_big_photo" src="img/little/0055.png" alt="">
-                    </div>
-                    <div class="cardMsgBx col-7">
-                        <div class="cardtextBx">
-                            <button>詳細資料</button>
-                            <button>保護</button>
-                        </div>
-                        <div class="cardtextBx">
-                            <p>技能一</p>
-                        </div>
-                        <div class="cardtextBx">
-                            <p>技能二</p>
-                        </div>
-                        <div class="cardtextBx">
-                            <p>技能三</p>
-                        </div>
-                        <div class="cardtextBx">
-                            <button>強化</button>
-                            <button>合成</button>
-                            <button>技能繼承</button>
-                        </div>
-                    </div>
-                </div>
-            </div> -->
-            <div class="bagBx col-6">
-                <div class="bagitemBx">
-                    <!-- <div class="backgroundImgBx">
-                        <img v-bind:src="item.attriImg" v-bind:realimg="item.littleImg" alt="" onclick="getsrc(this)">
-                    </div> -->
-                    <!-- <img v-bind:src="item.cardImg" @click="plus" alt=""> -->
-                </div>
-            </div>
-        </div>
-    </div>
-
-    <!-- <div id="app">
-        <li v-for="item in data.carddata">
-            {{item.cardid}}
-        </li>
-    </div> -->
 
     <!-- <script>
         $.ajax({
@@ -200,7 +104,7 @@
                 onBeforeMount(() => {
                     axios.get(url).then(
                         res => {
-                            console.log(res.data)
+                            //console.log(res.data)
                             data.carddata = res.data
                         }
                     ).catch(err => {
@@ -223,6 +127,15 @@
 
     </script>
     <script>
+        $(document).ready(function () {
+            let limit = 5;
+            $('input[type=checkbox]').on('change', function (e) {
+                if ($('input[type=checkbox]:checked').length > limit) {
+                    $(this).prop('checked', false);
+                    alert("選擇不得超出五個");
+                }
+            });
+        });
 
         $('#btnSend').on('click', function () {
             let resArray = [];
