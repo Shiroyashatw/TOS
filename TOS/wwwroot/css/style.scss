@@ -763,8 +763,8 @@ section {
     }
 
     label img {
-        height: 96px;
-        width: 96px;
+        height: 64px;
+        width: 64px;
         transition-duration: 0.2s;
         transform-origin: 50% 50%;
         opacity: .5;
@@ -782,7 +782,7 @@ section {
     // }
 
     :checked+label img {
-        transform: scale(0.85);
+        transform: scale(1.5);
         //box-shadow: 0 0 5px #333;
         z-index: -1;
         opacity: 1;

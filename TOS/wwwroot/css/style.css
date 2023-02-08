@@ -627,14 +627,14 @@ section .contentBx .formBx .remember input[type=checkbox] {
   transform: scale(0);
 }
 .checkBx label img {
-  height: 96px;
-  width: 96px;
+  height: 64px;
+  width: 64px;
   transition-duration: 0.2s;
   transform-origin: 50% 50%;
   opacity: 0.5;
 }
 .checkBx :checked + label img {
-  transform: scale(0.85);
+  transform: scale(1.5);
   z-index: -1;
   opacity: 1;
 }
