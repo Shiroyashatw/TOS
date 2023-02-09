@@ -15,5 +15,9 @@ namespace TOS.Models
         public int UserMoney { get; set; }
         public int UserSoul { get; set; }
         public int UserMagicstone { get; set; }
+        public DateTime? UserSingupTime { get; set; }
+        public short? UserState { get; set; }
+        public bool? BackupState { get; set; }
+        public string AccountInfo { get; set; }
     }
 }

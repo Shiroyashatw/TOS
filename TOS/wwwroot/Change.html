@@ -29,7 +29,7 @@
 </head>
 
 <body>
-    <div class="container-fluid">
+    <div class="container-fluid" id="app">
         <nav class="navbar navbar-expand-lg navbar-dark bg-dark">
             <div class="container-fluid">
                 <a class="navbar-brand" href="#">TOS</a>
@@ -52,88 +52,38 @@
                 </div>
             </div>
         </nav>
-
-        <div class="formBx mt-2" id="app">
-            <form>
-                <div id="radio">
-                    <div class="inputBx col-12">
-                        <label for="Backup">是否為回鍋帳號:</label>
-                        <label><input type="radio" name="BackupState" value="true"><span class="round button">是</span></label>
-                        <label><input type="radio" name="BackupState" value="false"><span class="round button">否</span></label>
-                    </div>
-                    <!-- 摺疊 -->
-                    <div class="Chosebtn">
-                        <a class="btn btn-primary me-2" data-bs-toggle="collapse" href="#multiCollapseExample1" role="button"
-                        aria-expanded="false" aria-controls="multiCollapseExample1">一抽進化抽中列表</a>
-                    <button class="btn btn-primary me-2" type="button" data-bs-toggle="collapse"
-                        data-bs-target="#multiCollapseExample2" aria-expanded="false"
-                        aria-controls="multiCollapseExample2">想交換列表</button>
-                    <button class="btn btn-primary" type="button" data-bs-toggle="collapse"
-                        data-bs-target=".multi-collapse" aria-expanded="false"
-                        aria-controls="multiCollapseExample1 multiCollapseExample2">全部展開/收起</button>
-                    </div>
-                    <p>
-                        
-                    </p>
-                    <div class="row">
-                        <!-- 摺疊列表 -->
-                        <div class="col-12">
-                            <div class="collapse multi-collapse" id="multiCollapseExample1">
-                                <h2>請設定帳號一抽列表</h2>
-                                <div class="checkBx">
-                                    <div class="itemBx" v-for="item in data.carddata">
-                                        <input type="checkbox" class="chose" :text="'list'+item.cardName"
-                                            v-bind:id="item.cardId" v-model="group" name="card"
-                                            v-bind:value="item.cardId"
-                                            :disabled="group.length >= max && group.indexOf(item.cardId) === -1">
-                                        <label class="col-1" :for="item.cardId"><img v-bind:src="item.cardImg"
-                                                alt=""></label>
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
-                        <div class="col">
-                            
-                            <div class="collapse multi-collapse" id="multiCollapseExample2">
-                                <h2>請設定想交換的列表</h2>
-                                <div class="checkBx">
-                                    <div class="itemBx" v-for="wantitem in data.carddata">
-                                        <input type="checkbox" class="chose" :text="'list'+wantitem.cardName"
-                                            v-bind:id="'want'+wantitem.cardId" v-model="wantgroup" name="wantcard"
-                                            v-bind:value="wantitem.cardId"
-                                            :disabled="wantgroup.length >= max && wantgroup.indexOf(wantitem.cardId) === -1">
-                                        <label class="col-1" :for="'want'+wantitem.cardId"><img
-                                                v-bind:src="wantitem.cardImg" alt=""></label>
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                    <!-- 摺疊 -->
-                    <div class="mb-3">
-                        <label for="accountInfo" class="form-label">備註:(可輸入聯絡管道如巴哈、ptt站內等等)</label>
-                        <textarea class="form-control" id="accountInfo" rows="3" maxlength="100"
-                            name="accountInfo"></textarea>
-                    </div>
-                    
-                    <button type="button" id="btnSend" class="btn btn-primary">送出</button>
-                </div>
-            </form>
+        <div class="ChangeList col-12" v-for="item in data.carddata">
+            <h6>玩家姓名:{{item.userName}}</h6>
+            <span v-if="item.userBackState === true" class="back">回鍋</span>
+            <span v-else class="normal">一般</span>
+            <ul>
+                <li>可交換列表:</li>
+                <li v-for="itemhave in item.haveCard">
+                    <img :src="itemhave.cardimg" alt="">
+                </li>
+            </ul>
+            <ul>
+                <li>想交換列表:</li>
+                <li v-for="itemwant in item.wantCard">
+                    <img :src="itemwant.cardimg" alt="">
+                </li>
+            </ul>
         </div>
+
     </div>
 
     <script>
         const { ref, reactive, onBeforeMount } = Vue;
-        const url = '/api/CardList'
+        const url = '/api/Exchange'
 
         const App = {
             setup() {
                 const data = reactive({
                     carddata: '',
                 })
-                const group = ref([])
-                const wantgroup = ref([])
-                const max = 5
+                //const group = ref([])
+                //const wantgroup = ref([])
+                //const max = 5
                 onBeforeMount(() => {
                     axios.get(url).then(
                         res => {
@@ -144,7 +94,7 @@
                         console.log(err)
                     })
                 })
-                return { data, group, wantgroup, max };
+                return { data};
             },
             methods: {
                 plus: (event) => {

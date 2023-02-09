@@ -763,8 +763,8 @@ section {
     }
 
     label img {
-        height: 64px;
-        width: 64px;
+        height: 36px;
+        width: 36px;
         transition-duration: 0.2s;
         transform-origin: 50% 50%;
         opacity: .5;
@@ -791,4 +791,41 @@ section {
 
 .inputBx {
     margin: 1rem 0;
+}
+
+// 交換頁面
+.ChangeList {
+    display: flex;
+    align-items: center;
+    height: 15vh;
+    //justify-content: center;
+    span {
+        width: 48px;
+        height: 48px;
+        text-align: center;
+        border-radius: .3rem;
+    }
+    .back {
+        border: 2px solid #028f76;
+        background-color: #028f76;
+        color: #fff;
+    }
+    .normal {
+        border: 2px solid #03a9f4;
+        background-color: #03a9f4;
+        color: #fff;
+    }
+    ul {
+        list-style: none;
+        display: flex;
+        li {
+            width: 60px;
+            margin: 0 .1rem;
+            img {
+                margin: 0 .2rem;
+                width: 100%;
+                object-fit: contain;
+            }
+        }
+    }
 }

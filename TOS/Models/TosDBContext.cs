@@ -20,13 +20,18 @@ namespace TOS.Models
         public virtual DbSet<AttrTable> AttrTables { get; set; }
         public virtual DbSet<Card> Cards { get; set; }
         public virtual DbSet<CardListTable> CardListTables { get; set; }
+        public virtual DbSet<ExchangeTable> ExchangeTables { get; set; }
         public virtual DbSet<Item> Items { get; set; }
         public virtual DbSet<Skill> Skills { get; set; }
         public virtual DbSet<User> Users { get; set; }
 
         protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)
         {
-            
+//            if (!optionsBuilder.IsConfigured)
+//            {
+//#warning To protect potentially sensitive information in your connection string, you should move it out of source code. You can avoid scaffolding the connection string by using the Name= syntax to read it from configuration - see https://go.microsoft.com/fwlink/?linkid=2131148. For more guidance on storing connection strings, see http://go.microsoft.com/fwlink/?LinkId=723263.
+//                optionsBuilder.UseSqlServer("Server=.\\sqlexpress;Database=TosDB;Integrated Security=True;");
+//            }
         }
 
         protected override void OnModelCreating(ModelBuilder modelBuilder)
@@ -105,6 +110,29 @@ namespace TOS.Models
                     .HasColumnName("card_img");
             });
 
+            modelBuilder.Entity<ExchangeTable>(entity =>
+            {
+                entity.HasKey(e => e.CardListId);
+
+                entity.ToTable("exchangeTable");
+
+                entity.Property(e => e.CardListId).HasColumnName("cardListID");
+
+                entity.Property(e => e.CardId).HasColumnName("cardID");
+
+                entity.Property(e => e.CardState).HasColumnName("cardState");
+
+                entity.Property(e => e.CreateTime)
+                    .HasColumnType("datetime")
+                    .HasColumnName("createTime");
+
+                entity.Property(e => e.UpdateTime)
+                    .HasColumnType("datetime")
+                    .HasColumnName("updateTime");
+
+                entity.Property(e => e.UserId).HasColumnName("userID");
+            });
+
             modelBuilder.Entity<Item>(entity =>
             {
                 entity.ToTable("item");
@@ -166,6 +194,12 @@ namespace TOS.Models
                     .HasColumnName("account")
                     .IsFixedLength(true);
 
+                entity.Property(e => e.AccountInfo)
+                    .HasMaxLength(150)
+                    .HasColumnName("accountInfo");
+
+                entity.Property(e => e.BackupState).HasColumnName("backupState");
+
                 entity.Property(e => e.Password)
                     .IsRequired()
                     .HasMaxLength(10)
@@ -181,7 +215,13 @@ namespace TOS.Models
 
                 entity.Property(e => e.UserMoney).HasColumnName("user_money");
 
+                entity.Property(e => e.UserSingupTime)
+                    .HasColumnType("datetime")
+                    .HasColumnName("user_SingupTime");
+
                 entity.Property(e => e.UserSoul).HasColumnName("user_soul");
+
+                entity.Property(e => e.UserState).HasColumnName("user_state");
 
                 entity.Property(e => e.Userid)
                     .ValueGeneratedOnAdd()

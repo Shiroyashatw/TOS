@@ -72,8 +72,7 @@ body {
 .middle-info .battle-info #start {
   font-size: 48px;
   font-weight: 900;
-  -ms-writing-mode: tb-lr;
-      writing-mode: vertical-lr;
+  writing-mode: vertical-lr;
   border: 0;
   background: rgba(0, 0, 0, 0);
   color: rgb(245, 244, 232);
@@ -83,8 +82,7 @@ body {
   font-size: 64px;
   letter-spacing: 1rem;
   font-weight: 900;
-  -ms-writing-mode: tb-lr;
-      writing-mode: vertical-lr;
+  writing-mode: vertical-lr;
   color: #fff;
 }
 .middle-info .test-img {
@@ -609,7 +607,6 @@ section .contentBx .formBx .remember input[type=checkbox] {
   -webkit-touch-callout: none;
   -webkit-user-select: none;
   -moz-user-select: none;
-  -ms-user-select: none;
   user-select: none;
 }
 .checkBx label::before {
@@ -630,8 +627,8 @@ section .contentBx .formBx .remember input[type=checkbox] {
   transform: scale(0);
 }
 .checkBx label img {
-  height: 64px;
-  width: 64px;
+  height: 36px;
+  width: 36px;
   transition-duration: 0.2s;
   transform-origin: 50% 50%;
   opacity: 0.5;
@@ -644,4 +641,40 @@ section .contentBx .formBx .remember input[type=checkbox] {
 
 .inputBx {
   margin: 1rem 0;
+}
+
+.ChangeList {
+  display: flex;
+  align-items: center;
+  height: 15vh;
+}
+.ChangeList span {
+  width: 48px;
+  height: 48px;
+  text-align: center;
+  border-radius: 0.3rem;
+}
+.ChangeList .back {
+  border: 2px solid #028f76;
+  background-color: #028f76;
+  color: #fff;
+}
+.ChangeList .normal {
+  border: 2px solid #03a9f4;
+  background-color: #03a9f4;
+  color: #fff;
+}
+.ChangeList ul {
+  list-style: none;
+  display: flex;
+}
+.ChangeList ul li {
+  width: 60px;
+  margin: 0 0.1rem;
+}
+.ChangeList ul li img {
+  margin: 0 0.2rem;
+  width: 100%;
+  -o-object-fit: contain;
+     object-fit: contain;
 }/*# sourceMappingURL=style.css.map */
