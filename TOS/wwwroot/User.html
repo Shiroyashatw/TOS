@@ -43,10 +43,10 @@
                             <a class="nav-link active" aria-current="page" href="#">主頁</a>
                         </li>
                         <li class="nav-item">
-                            <a class="nav-link" href="#">我的列表</a>
+                            <a class="nav-link" href="User.html">我的列表</a>
                         </li>
                         <li class="nav-item">
-                            <a class="nav-link" href="#">交換列表</a>
+                            <a class="nav-link" href="Change.html">交換列表</a>
                         </li>
                     </ul>
                 </div>
@@ -195,7 +195,8 @@
                 }
             }).then(res => {
                 console.log("Y")
-                console.log(res)
+                $(location).attr("href", "Change.html")
+                //console.log(res)
             }).catch(err => {
                 console.log(err)
             })

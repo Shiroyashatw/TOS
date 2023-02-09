@@ -48,7 +48,7 @@
                         <input id="btnSend" type="button" name="" value="登入">
                     </div>
                     <div class="inputBx">
-                        <p>沒有帳號? <a href="">註冊</a></p>
+                        <p>沒有帳號? <a href="singup.html">註冊</a></p>
                     </div>
                 </form>
             </div>
@@ -65,7 +65,7 @@
             res => {
                 console.log(res)
                 if(res.data == "已登入") {
-                    $(location).attr("href", "main.html")
+                    $(location).attr("href", "Change.html")
                 }
             }
         ).catch(
@@ -85,7 +85,7 @@
             }).then(
                 res => {
                     if (res.data == "OK") {
-                        $(location).attr("href", "main.html")
+                        $(location).attr("href", "Change.html")
                     }
                     
                 }

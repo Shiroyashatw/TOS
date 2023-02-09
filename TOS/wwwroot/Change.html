@@ -2,155 +2,224 @@
 <html lang="en">
 
 <head>
-    <meta charset="UTF-8">
-    <meta http-equiv="X-UA-Compatible" content="IE=edge">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>交換頁面</title>
+  <meta charset="UTF-8" />
+  <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>交換頁面</title>
 
-    <!-- Bootstrap CSS -->
-    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/css/bootstrap.min.css" rel="stylesheet"
-        integrity="sha384-GLhlTQ8iRABdZLl6O3oVMWSktQOp6b7In1Zl3/Jr59b6EGGoI1aFkw7cmDA6j6gD" crossorigin="anonymous">
-    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/js/bootstrap.bundle.min.js"
-        integrity="sha384-w76AqPfDkMBDXo30jS1Sgez6pr3x5MlQ1ZAGC+nuZB+EYdgRZgiwxhTBTkF7CXvN"
-        crossorigin="anonymous"></script>
-    <!-- 引用Vue -->
-    <script src="https://unpkg.com/vue@3/dist/vue.global.js"></script>
-    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.1/jquery.min.js"></script>
-    <script src="https://cdn.jsdelivr.net/npm/axios@1.1.2/dist/axios.min.js"></script>
+  <!-- Bootstrap CSS -->
+  <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/css/bootstrap.min.css" rel="stylesheet"
+    integrity="sha384-GLhlTQ8iRABdZLl6O3oVMWSktQOp6b7In1Zl3/Jr59b6EGGoI1aFkw7cmDA6j6gD" crossorigin="anonymous" />
+  <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/js/bootstrap.bundle.min.js"
+    integrity="sha384-w76AqPfDkMBDXo30jS1Sgez6pr3x5MlQ1ZAGC+nuZB+EYdgRZgiwxhTBTkF7CXvN"
+    crossorigin="anonymous"></script>
+  <!-- 引用Vue -->
+  <script src="https://unpkg.com/vue@3/dist/vue.global.js"></script>
+  <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.1/jquery.min.js"></script>
+  <script src="https://cdn.jsdelivr.net/npm/axios@1.1.2/dist/axios.min.js"></script>
 
-    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.10.3/font/bootstrap-icons.css">
-    <link rel="stylesheet" href="css/style.css">
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.10.3/font/bootstrap-icons.css" />
+  <link rel="stylesheet" href="css/style.css" />
 
-    <style>
-        .checkBx input[type="checkbox"] {
-            display: none;
-        }
-    </style>
+  <style>
+    .checkBx input[type="checkbox"] {
+      display: none;
+    }
+  </style>
 </head>
 
 <body>
-    <div class="container-fluid" id="app">
-        <nav class="navbar navbar-expand-lg navbar-dark bg-dark">
-            <div class="container-fluid">
-                <a class="navbar-brand" href="#">TOS</a>
-                <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav"
-                    aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
-                    <span class="navbar-toggler-icon"></span>
-                </button>
-                <div class="collapse navbar-collapse" id="navbarNav">
-                    <ul class="navbar-nav">
-                        <li class="nav-item">
-                            <a class="nav-link active" aria-current="page" href="#">主頁</a>
-                        </li>
-                        <li class="nav-item">
-                            <a class="nav-link" href="#">我的列表</a>
-                        </li>
-                        <li class="nav-item">
-                            <a class="nav-link" href="#">交換列表</a>
-                        </li>
-                    </ul>
-                </div>
-            </div>
-        </nav>
-        <div class="ChangeList col-12" v-for="item in data.carddata">
-            <h6>玩家姓名:{{item.userName}}</h6>
-            <span v-if="item.userBackState === true" class="back">回鍋</span>
-            <span v-else class="normal">一般</span>
-            <ul>
-                <li>可交換列表:</li>
-                <li v-for="itemhave in item.haveCard">
-                    <img :src="itemhave.cardimg" alt="">
-                </li>
-            </ul>
-            <ul>
-                <li>想交換列表:</li>
-                <li v-for="itemwant in item.wantCard">
-                    <img :src="itemwant.cardimg" alt="">
-                </li>
-            </ul>
+  <div class="container-fluid" id="app">
+    <nav class="navbar navbar-expand-lg navbar-dark bg-dark">
+      <div class="container-fluid">
+        <a class="navbar-brand" href="#">TOS</a>
+        <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav"
+          aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
+          <span class="navbar-toggler-icon"></span>
+        </button>
+        <div class="collapse navbar-collapse" id="navbarNav">
+          <ul class="navbar-nav">
+            <li class="nav-item">
+              <a class="nav-link active" aria-current="page" href="#">主頁</a>
+            </li>
+            <li class="nav-item">
+              <a class="nav-link" href="User.html">我的列表</a>
+            </li>
+            <li class="nav-item">
+              <a class="nav-link" href="Change.html">交換列表</a>
+            </li>
+            <li class="nav-item">
+              <a id="LoginOut" class="nav-link" href="#">登出</a>
+            </li>
+          </ul>
         </div>
+      </div>
+    </nav>
+    <div class="d-flex col-12">
+      <div class="col-3">
+        <span>搜尋選項:</span>
+        <button type="button" class="btn btn-outline-secondary">一般帳號</button>
+        <button type="button" class="btn btn-outline-success">回鍋帳號</button>
+      </div>
+      <div class="col-3">
+        <span>快速搜索:</span>
+        <button type="button" class="btn btn-outline-info">智能配對</button>
+      </div>
+      <div class="col-4">
+        <form class="d-flex">
+          <input class="form-control me-2" type="search" placeholder="Search" aria-label="Search">
+          <button class="btn btn-outline-success" type="submit">Search</button>
+        </form>
+      </div>
 
     </div>
+    <div class="ChangeListTitle col-12">
+      <div class="Title col-2">
+        <h4>玩家名稱</h4>
+      </div>
+      <div class="Title col-2">
+        <h4>帳號狀態</h4>
+      </div>
+      <div class="Title col-3">
+        <h4>持有一抽列表</h4>
+      </div>
+      <div class="Title col-3">
+        <h4>想交換料表</h4>
+      </div>
+      <!-- <div class="Title col-2">
+          <h4>玩家備註</h4>
+        </div> -->
+    </div>
+    <div class="ChangeList col-12" v-for="item in data.carddata">
+      <div class="Title col-2">
+        <h6>玩家姓名:{{item.userName}}</h6>
+      </div>
+      <div class="Title col-2">
+        <span v-if="item.userBackState === true" class="back">回鍋</span>
+        <span v-else class="normal">一般</span>
+      </div>
+      <div class="Title col-3">
+        <ul>
+          <li>可交換列表:</li>
+          <li v-for="itemhave in item.haveCard">
+            <img :src="itemhave.cardimg" alt="" />
+          </li>
+        </ul>
+      </div>
+      <div class="Title col-3">
+        <ul>
+          <li>想交換列表:</li>
+          <li v-for="itemwant in item.wantCard">
+            <img :src="itemwant.cardimg" alt="" />
+          </li>
+        </ul>
+      </div>
+    </div>
+  </div>
 
-    <script>
-        const { ref, reactive, onBeforeMount } = Vue;
-        const url = '/api/Exchange'
+  <script>
+    const { ref, reactive, onBeforeMount } = Vue;
+    const url = "/api/Exchange";
 
-        const App = {
-            setup() {
-                const data = reactive({
-                    carddata: '',
-                })
-                //const group = ref([])
-                //const wantgroup = ref([])
-                //const max = 5
-                onBeforeMount(() => {
-                    axios.get(url).then(
-                        res => {
-                            console.log(res.data)
-                            data.carddata = res.data
-                        }
-                    ).catch(err => {
-                        console.log(err)
-                    })
-                })
-                return { data};
-            },
-            methods: {
-                plus: (event) => {
-                    console.log(event.target.tagName);
-                }
-            }
-        };
-
-
-        //console.log(data)
-        const myVue = Vue.createApp(App).mount("#app")
-
-    </script>
-    <script>
-
-        $('#btnSend').on('click', function () {
-            let resArray = [];
-            let wantresArray = [];
-            $('input:checkbox[name=card]:checked').each(function () {
-                let res = $(this).val()
-                resArray.push(res)
-
-                // add $(this).val() to your array
-            });
-            $('input:checkbox[name=wantcard]:checked').each(function () {
-                let wantres = $(this).val()
-                wantresArray.push(wantres)
-
-                // add $(this).val() to your array
-            });
-            let BackupVal = $('input[name="BackupState"]:checked').val()
-            if(BackupVal == "true"){
-                BackupVal = true
-            }
-            else {
-                BackupVal = false
-            }
-            console.log(resArray)
-            console.log(wantresArray)
-            axios({
-                method: 'post',
-                url: '/api/User',
-                data: {
-                    BackupState: BackupVal,
-                    HaveCard: resArray,
-                    Wantcard: wantresArray,
-                    AccountInfo: $('input[name="accountInfo"]').val(),
-                }
-            }).then(res => {
-                console.log("Y")
-                console.log(res)
-            }).catch(err => {
-                console.log(err)
+    const App = {
+      setup() {
+        const data = reactive({
+          carddata: "",
+        });
+        
+        onBeforeMount(() => {
+          axios
+            .get(url)
+            .then((res) => {
+              console.log(res.data);
+              data.carddata = res.data;
             })
+            .catch((err) => {
+              console.log(err);
+            });
+        });
+        return { data };
+      },
+      methods: {
+        plus: (event) => {
+          console.log(event.target.tagName);
+        },
+      },
+    };
+
+    //console.log(data)
+    const myVue = Vue.createApp(App).mount("#app");
+  </script>
+  <script>
+    axios({
+      method: "get",
+      url: "api/User"
+    }).then(
+      res => {
+        console.log(res)
+        if (res.data == "尚未登入") {
+          $(location).attr("href", "login.html")
+        }
+      }
+    ).catch(
+      err => console.log(err)
+    )
+    $('#LoginOut').on('click', function () {
+      axios({
+        method: "delete",
+        url: "api/Login"
+      }).then(
+        res => {
+          if (res.data == "登出") {
+            $(location).attr("href", "login.html")
+          }
+        }
+      ).catch(
+        err => console.log(err)
+      )
+    })
+    $("#btnSend").on("click", function () {
+      let resArray = [];
+      let wantresArray = [];
+      $("input:checkbox[name=card]:checked").each(function () {
+        let res = $(this).val();
+        resArray.push(res);
+
+        // add $(this).val() to your array
+      });
+      $("input:checkbox[name=wantcard]:checked").each(function () {
+        let wantres = $(this).val();
+        wantresArray.push(wantres);
+
+        // add $(this).val() to your array
+      });
+      let BackupVal = $('input[name="BackupState"]:checked').val();
+      if (BackupVal == "true") {
+        BackupVal = true;
+      } else {
+        BackupVal = false;
+      }
+      console.log(resArray);
+      console.log(wantresArray);
+      axios({
+        method: "post",
+        url: "/api/User",
+        data: {
+          BackupState: BackupVal,
+          HaveCard: resArray,
+          Wantcard: wantresArray,
+          AccountInfo: $('input[name="accountInfo"]').val(),
+        },
+      })
+        .then((res) => {
+          console.log("Y");
+          console.log(res);
         })
-    </script>
+        .catch((err) => {
+          console.log(err);
+        });
+    });
+  </script>
 </body>
 
 </html>

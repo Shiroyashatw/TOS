@@ -643,6 +643,23 @@ section .contentBx .formBx .remember input[type=checkbox] {
   margin: 1rem 0;
 }
 
+.ChangeListTitle {
+  display: flex;
+  flex-wrap: wrap;
+  text-align: center;
+  align-items: center;
+  justify-content: center;
+}
+.ChangeListTitle .Title {
+  color: #fff;
+  letter-spacing: 0.1rem;
+  border: 2px solid #028f76;
+  background-color: #035277;
+}
+.ChangeListTitle .Title h4 {
+  margin-top: 5px;
+}
+
 .ChangeList {
   display: flex;
   align-items: center;
