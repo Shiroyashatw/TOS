@@ -57,13 +57,15 @@
     </nav>
     <div class="d-flex col-12">
       <div class="col-3">
+        
         <span>搜尋選項:</span>
         <button type="button" class="btn btn-outline-secondary">一般帳號</button>
         <button type="button" class="btn btn-outline-success">回鍋帳號</button>
+        
       </div>
       <div class="col-3">
         <span>快速搜索:</span>
-        <button type="button" class="btn btn-outline-info">智能配對</button>
+        <button type="button" v-on:click="getSmartData" id="smartbtn" class="btn btn-outline-info">智能配對</button>
       </div>
       <div class="col-4">
         <form class="d-flex">
@@ -115,35 +117,49 @@
         </ul>
       </div>
     </div>
+    
+    <div class="h2" v-for="item in data.smartdata">
+      {{item.userId}}
+    </div>
   </div>
 
   <script>
     const { ref, reactive, onBeforeMount } = Vue;
     const url = "/api/Exchange";
-
+    
     const App = {
       setup() {
         const data = reactive({
           carddata: "",
+          smartdata: "",
         });
-        
+        //const smartdata = "";
         onBeforeMount(() => {
           axios
             .get(url)
             .then((res) => {
-              console.log(res.data);
+              //console.log(res.data);
               data.carddata = res.data;
             })
             .catch((err) => {
               console.log(err);
             });
         });
-        return { data };
-      },
-      methods: {
-        plus: (event) => {
-          console.log(event.target.tagName);
-        },
+        const getSmartData = () => {
+          //alert('123')
+          axios({
+            method: 'get',
+            url: '/api/Exchange/Can'
+          }).then(res => {
+            //console.log(res.data)
+            $('.ChangeList').empty()
+            data.smartdata = res.data
+            console.log(data.smartdata)
+          }).catch(err => {
+            console.log(err)
+          })
+        }
+        return { data,getSmartData};
       },
     };
 
@@ -156,7 +172,7 @@
       url: "api/User"
     }).then(
       res => {
-        console.log(res)
+        //console.log(res)
         if (res.data == "尚未登入") {
           $(location).attr("href", "login.html")
         }
