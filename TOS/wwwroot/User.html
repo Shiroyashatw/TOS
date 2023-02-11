@@ -20,7 +20,7 @@
 
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.10.3/font/bootstrap-icons.css">
     <link rel="stylesheet" href="css/style.css">
-
+    <script src="js/LoginChecked.js"></script>
     <style>
         .checkBx input[type="checkbox"] {
             display: none;
@@ -54,7 +54,7 @@
         </nav>
 
         <div class="formBx mt-2" id="app">
-            <form>
+            <form v-if="data.BackupState === 0">
                 <div id="radio">
                     <div class="inputBx col-12">
                         <label for="Backup">是否為回鍋帳號:</label>
@@ -119,6 +119,7 @@
                     <button type="button" id="btnSend" class="btn btn-primary">送出</button>
                 </div>
             </form>
+            <p v-else>1</p>
         </div>
     </div>
 
@@ -130,6 +131,7 @@
             setup() {
                 const data = reactive({
                     carddata: '',
+                    BackupState: ''
                 })
                 const group = ref([])
                 const wantgroup = ref([])
@@ -143,14 +145,19 @@
                     ).catch(err => {
                         console.log(err)
                     })
+
+                    axios({
+                        method:"get",
+                        url:"api/User",
+                    }).then(res => {
+                        console.log(res)
+                        data.BackupState = res.data;
+                    }).catch(err => {
+                        console.log(err)
+                    })
                 })
                 return { data, group, wantgroup, max };
             },
-            methods: {
-                plus: (event) => {
-                    console.log(event.target.tagName);
-                }
-            }
         };
 
 
@@ -175,7 +182,23 @@
 
                 // add $(this).val() to your array
             });
+            if (resArray.length != 5) {
+                alert("請選擇五張一抽抽中卡片")
+                return
+            }
+            if (wantresArray.length != 5) {
+                alert("請選擇五張想交換的卡片")
+                return
+            }
             let BackupVal = $('input[name="BackupState"]:checked').val()
+            if (BackupVal == null){
+                alert("請選擇帳號狀態!")
+                return
+            }
+            if($('input[name="accountInfo"]').val() == null){
+                alert("請輸入聯絡管道!")
+                return
+            }
             if(BackupVal == "true"){
                 BackupVal = true
             }

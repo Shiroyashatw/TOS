@@ -23,17 +23,24 @@ namespace TOS.Controllers
             _contextAccessor = contextAccessor;
         }
         [HttpGet]
-        public async Task<ActionResult<IEnumerable<dynamic>>> GetInfo()
+        public string GetInfo()
         {
             var Claim = _contextAccessor.HttpContext.User.Claims.ToList();
 
             var username = Claim.Where(a => a.Type == "UserName").First().Value;
 
-            var res = from u in _db.Users
-                      where u.Username == username
-                      select u;
-
-            return await res.ToListAsync();
+            var res = (from u in _db.Users
+                      where u.Username == username && u.BackupState != null
+                      select u).SingleOrDefault();
+            
+            if(res == null)
+            {
+                return "0";
+            }
+            else
+            {
+                return "1";
+            }
 
         }
         [HttpPost]

@@ -4,8 +4,9 @@ axios({
 }).then(
     res => {
         console.log(res)
-        if (res.data == "已登入") {
-            $(location).attr("href", "Change.html")
+        console.log(res.data)
+        if (res.data == "尚未登入") {
+            $(location).attr("href", "login.html")
         }
     }
 ).catch(
