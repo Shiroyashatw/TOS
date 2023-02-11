@@ -1,3 +1,7 @@
+// * {
+//   padding: 0;
+//   margin: 0;
+// }
 body {
   // background-image: url(img/龐貝城.jpg);
   background-size: cover;
@@ -5,9 +9,9 @@ body {
   overflow-x: hidden;
 }
 
-::-webkit-scrollbar {
-  display: none;
-}
+// ::-webkit-scrollbar {
+//   display: none;
+// }
 
 .container {
   max-width: 1920px;
@@ -783,7 +787,20 @@ section {
 .inputBx {
   margin: 1rem 0;
 }
-
+// 搜索列
+.searchBx {
+  margin: .4rem;
+  .searchContextBx{
+    span {
+      margin: auto;
+      font-size: 20px;
+      margin-right: .2rem;
+    }
+    button {
+      margin: 0 .2rem;
+    }
+  }
+}
 // 交換頁面
 .ChangeListTitle {
   display: flex;
@@ -792,20 +809,31 @@ section {
   align-items: center;
   justify-content: center;
   .Title {
+    padding: .3rem 0;
     color: #fff;
     letter-spacing: .1rem;
-    border: 2px solid #028f76;
+    border: 2px solid #fff;
     background-color: #035277;
     h4 {
-        margin-top: 5px;
+      font-size: 20px;
+      font-weight: 900;
+      margin: auto;
     }
   }
 }
-.ChangeList {
+.ChangeContent {
   display: flex;
+  flex-wrap: wrap;
+  text-align: center;
   align-items: center;
-  height: 15vh;
+  height: 12vh;
+  border-bottom: 4px solid #607d8b  ;
   //justify-content: center;
+  h6 {
+    padding-left: 2rem;
+    text-align: left;
+    font-size: 24px;
+  }
   span {
     width: 48px;
     height: 48px;
@@ -813,26 +841,42 @@ section {
     border-radius: 0.3rem;
   }
   .back {
+    font-size: 24px;
+    padding: .4rem 1rem;
     border: 2px solid #028f76;
     background-color: #028f76;
+    border-radius: .6rem;
     color: #fff;
   }
   .normal {
+    font-size: 24px;
+    padding: .4rem 1rem;
     border: 2px solid #03a9f4;
     background-color: #03a9f4;
+    border-radius: .6rem;
     color: #fff;
   }
+  .Title {
+    //display: flex;
+  }
   ul {
+    padding: 0;
     list-style: none;
     display: flex;
+    //text-align: center;
+    align-items: center;
+    justify-content: center;
+    margin: 0;
     li {
-      width: 60px;
-      margin: 0 0.1rem;
+      width: 15%;
+      margin: 0 0.25rem;
       img {
-        margin: 0 0.2rem;
         width: 100%;
         object-fit: contain;
       }
     }
+  }
+  .text {
+    font-size: 14px;
   }
 }

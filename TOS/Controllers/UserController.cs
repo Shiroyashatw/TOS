@@ -37,7 +37,7 @@ namespace TOS.Controllers
 
         }
         [HttpPost]
-        public ActionResult<ExchangeTable> PostData(ExchangeTableDto exchangeTableDtos)
+        public ActionResult<ExchangeTableDto> PostData(ExchangeTableDto exchangeTableDtos)
         {
             var Claim = _contextAccessor.HttpContext.User.Claims.ToList();
 

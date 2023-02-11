@@ -20,6 +20,7 @@
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.10.3/font/bootstrap-icons.css">
     <link rel="stylesheet" href="css/style.css">
 
+    <script src="js/LoginCheck.js"></script>
 </head>
 
 <body>
@@ -34,16 +35,16 @@
                 <form action="">
                     <div class="inputBx">
                         <span>帳號</span>
-                        <input type="text" name="account">
+                        <input type="text" name="account" onkeyup="value=value.replace(/[^\w\/]/ig,'')" maxlength="8">
                         <span></span>
                     </div>
                     <div class="inputBx">
                         <span>密碼</span>
-                        <input type="password" name="password">
+                        <input type="password" name="password" onkeyup="value=value.replace(/[^\w\/]/ig,'')" maxlength="8">
                     </div>
-                    <div class="remember">
+                    <!-- <div class="remember">
                         <label for=""><input type="checkbox" name="">記住我</label>
-                    </div>
+                    </div> -->
                     <div class="inputBx">
                         <input id="btnSend" type="button" name="" value="登入">
                     </div>
@@ -56,43 +57,7 @@
     </section>
 
 
-    <script>
-
-        axios({
-            method: "get",
-            url: "api/Login"
-        }).then(
-            res => {
-                console.log(res)
-                if(res.data == "已登入") {
-                    $(location).attr("href", "Change.html")
-                }
-            }
-        ).catch(
-            err => {
-                console.log(err)
-            }
-        )
-
-        $('#btnSend').on('click', function () {
-            axios({
-                method: "post",
-                url: "api/Login",
-                data: {
-                    account: $('input[name="account"]').val(),
-                    password: $('input[name="password"]').val(),
-                }
-            }).then(
-                res => {
-                    if (res.data == "OK") {
-                        $(location).attr("href", "Change.html")
-                    }
-                    
-                }
-
-            ).catch((error) => console.log(error))
-        })
-    </script>
+    <script src="js/Login.js"></script>
 </body>
 
 </html>

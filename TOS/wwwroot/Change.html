@@ -55,19 +55,19 @@
         </div>
       </div>
     </nav>
-    <div class="d-flex col-12">
-      <div class="col-3">
-        
+    <!-- 搜索列 -->
+    <div class="d-flex searchBx col-12">
+      <div class="searchContextBx col-3">
         <span>搜尋選項:</span>
         <button type="button" class="btn btn-outline-secondary">一般帳號</button>
         <button type="button" class="btn btn-outline-success">回鍋帳號</button>
-        
       </div>
-      <div class="col-3">
+      <div class="searchContextBx col-3">
         <span>快速搜索:</span>
         <button type="button" v-on:click="getSmartData" id="smartbtn" class="btn btn-outline-info">智能配對</button>
+        <button type="button" v-on:click="getAllData" class="btn btn-outline-info">一般檢視</button>
       </div>
-      <div class="col-4">
+      <div class=" searchContextBx col-4">
         <form class="d-flex">
           <input class="form-control me-2" type="search" placeholder="Search" aria-label="Search">
           <button class="btn btn-outline-success" type="submit">Search</button>
@@ -75,70 +75,107 @@
       </div>
 
     </div>
+    <!-- 標題提示列 -->
     <div class="ChangeListTitle col-12">
-      <div class="Title col-2">
-        <h4>玩家名稱</h4>
+      <div class="Title col-2 align-baseline">
+        <h4 class="align-baseline">玩家名稱</h4>
       </div>
-      <div class="Title col-2">
+      <div class="Title col-1">
         <h4>帳號狀態</h4>
       </div>
-      <div class="Title col-3">
+      <div class="Title col-4">
         <h4>持有一抽列表</h4>
       </div>
-      <div class="Title col-3">
+      <div class="Title col-4">
         <h4>想交換料表</h4>
       </div>
-      <!-- <div class="Title col-2">
-          <h4>玩家備註</h4>
-        </div> -->
-    </div>
-    <div class="ChangeList col-12" v-for="item in data.carddata">
-      <div class="Title col-2">
-        <h6>玩家姓名:{{item.userName}}</h6>
-      </div>
-      <div class="Title col-2">
-        <span v-if="item.userBackState === true" class="back">回鍋</span>
-        <span v-else class="normal">一般</span>
-      </div>
-      <div class="Title col-3">
-        <ul>
-          <li>可交換列表:</li>
-          <li v-for="itemhave in item.haveCard">
-            <img :src="itemhave.cardimg" alt="" />
-          </li>
-        </ul>
-      </div>
-      <div class="Title col-3">
-        <ul>
-          <li>想交換列表:</li>
-          <li v-for="itemwant in item.wantCard">
-            <img :src="itemwant.cardimg" alt="" />
-          </li>
-        </ul>
+      <div class="Title col-1">
+        <h4>玩家資訊</h4>
       </div>
     </div>
-    
-    <div class="h2" v-for="item in data.smartdata">
-      {{item.userId}}
+    <!-- 顯示交換列表 -->
+    <div class="ChangeList" id="All">
+      <div class="ChangeContent col-12" v-for="item in data.carddata">
+        <div class="Title col-2">
+          <h6>{{item.userName}}</h6>
+        </div>
+        <div class="Title col-1">
+          <span v-if="item.userBackState === true" class="back">回鍋</span>
+          <span v-else class="normal">一般</span>
+        </div>
+        <div class="Title col-4">
+          <ul class="col-12">
+            <li v-for="itemhave in item.haveCard">
+              <img :src="itemhave.cardimg" alt="" />
+            </li>
+          </ul>
+        </div>
+        <div class="Title col-4">
+          <ul class="col-12">
+            <li v-for="itemwant in item.wantCard">
+              <img :src="itemwant.cardimg" alt="">
+            </li>
+          </ul>
+          <!-- <ul>
+            <li>想交換列表:</li>
+            <li v-for="itemwant in item.wantCard">
+              <img :src="itemwant.cardimg" alt="" />
+            </li>
+          </ul> -->
+        </div>
+        <div class="Title col-1">
+          <a href="">詳情</a>
+        </div>
+      </div>
+
     </div>
+    <div class="ChangeList" id="smart">
+      <div class="ChangeContent col-12" v-for="items in data.smartdata">
+        <div class="Title col-2">
+          <h6>{{items.userName}}</h6>
+        </div>
+        <div class="Title col-1">
+          <span v-if="items.userBackupState === true" class="back">回鍋</span>
+          <span v-else class="normal">一般</span>
+        </div>
+        <div class="Title col-4">
+          <ul class="col-12">
+            <li v-for="itemhave in items.canGetCard">
+              <img :src="itemhave.cardImg" alt="" />
+            </li>
+          </ul>
+        </div>
+        <div class="Title col-4">
+          <ul class="col-12">
+            <li v-for="itemwant in items.canPostCard">
+              <img :src="itemwant.cardImg" alt="">
+            </li>
+          </ul>
+        </div>
+        <div class="Title col-1">
+          <a href="">詳情</a>
+        </div>
+      </div>
+    </div>
+
+
   </div>
 
   <script>
     const { ref, reactive, onBeforeMount } = Vue;
     const url = "/api/Exchange";
-    
+
     const App = {
       setup() {
         const data = reactive({
           carddata: "",
           smartdata: "",
         });
-        //const smartdata = "";
         onBeforeMount(() => {
           axios
             .get(url)
             .then((res) => {
-              //console.log(res.data);
+              console.log(res.data);
               data.carddata = res.data;
             })
             .catch((err) => {
@@ -152,14 +189,25 @@
             url: '/api/Exchange/Can'
           }).then(res => {
             //console.log(res.data)
-            $('.ChangeList').empty()
+            $('#All').empty()
             data.smartdata = res.data
             console.log(data.smartdata)
           }).catch(err => {
             console.log(err)
           })
         }
-        return { data,getSmartData};
+        const getAllData = () => {
+          axios
+            .get(url)
+            .then((res) => {
+              $('#smart').empty();
+              //data.carddata = res.data
+            })
+            .catch((err) => {
+              console.log(err);
+            });
+        }
+        return { data, getSmartData,getAllData };
       },
     };
 
@@ -167,19 +215,7 @@
     const myVue = Vue.createApp(App).mount("#app");
   </script>
   <script>
-    axios({
-      method: "get",
-      url: "api/User"
-    }).then(
-      res => {
-        //console.log(res)
-        if (res.data == "尚未登入") {
-          $(location).attr("href", "login.html")
-        }
-      }
-    ).catch(
-      err => console.log(err)
-    )
+
     $('#LoginOut').on('click', function () {
       axios({
         method: "delete",
@@ -194,47 +230,6 @@
         err => console.log(err)
       )
     })
-    $("#btnSend").on("click", function () {
-      let resArray = [];
-      let wantresArray = [];
-      $("input:checkbox[name=card]:checked").each(function () {
-        let res = $(this).val();
-        resArray.push(res);
-
-        // add $(this).val() to your array
-      });
-      $("input:checkbox[name=wantcard]:checked").each(function () {
-        let wantres = $(this).val();
-        wantresArray.push(wantres);
-
-        // add $(this).val() to your array
-      });
-      let BackupVal = $('input[name="BackupState"]:checked').val();
-      if (BackupVal == "true") {
-        BackupVal = true;
-      } else {
-        BackupVal = false;
-      }
-      console.log(resArray);
-      console.log(wantresArray);
-      axios({
-        method: "post",
-        url: "/api/User",
-        data: {
-          BackupState: BackupVal,
-          HaveCard: resArray,
-          Wantcard: wantresArray,
-          AccountInfo: $('input[name="accountInfo"]').val(),
-        },
-      })
-        .then((res) => {
-          console.log("Y");
-          console.log(res);
-        })
-        .catch((err) => {
-          console.log(err);
-        });
-    });
   </script>
 </body>
 

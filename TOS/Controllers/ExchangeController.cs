@@ -30,6 +30,7 @@ namespace TOS.Controllers
                            {
                                UserName = u.Username,
                                UserBackState = u.BackupState,
+                               UserAccountInfo = u.AccountInfo,
                                HaveCard = (from e in _db.ExchangeTables
                                          join c in _db.CardListTables
                                          on e.CardId equals c.CardId

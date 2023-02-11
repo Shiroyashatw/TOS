@@ -12,9 +12,9 @@ namespace TOS.Models
         public string Password { get; set; }
         public string Username { get; set; }
         public string Token { get; set; }
-        public int UserMoney { get; set; }
-        public int UserSoul { get; set; }
-        public int UserMagicstone { get; set; }
+        public int? UserMoney { get; set; }
+        public int? UserSoul { get; set; }
+        public int? UserMagicstone { get; set; }
         public DateTime? UserSingupTime { get; set; }
         public short? UserState { get; set; }
         public bool? BackupState { get; set; }
