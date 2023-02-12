@@ -706,6 +706,17 @@ section .contentBx .formBx .remember input[type=checkbox] {
   border-radius: 0.6rem;
   color: #fff;
 }
+.ChangeContent .Title a {
+  padding: 0.5rem 1rem;
+  color: #fff;
+  background-color: #035277;
+  border-radius: 1rem;
+  text-decoration: none;
+}
+.ChangeContent .Title a:hover {
+  background-color: #9e0c39;
+  transition: 0.3s;
+}
 .ChangeContent ul {
   padding: 0;
   list-style: none;
@@ -715,7 +726,7 @@ section .contentBx .formBx .remember input[type=checkbox] {
   margin: 0;
 }
 .ChangeContent ul li {
-  width: 15%;
+  width: 10%;
   margin: 0 0.25rem;
 }
 .ChangeContent ul li img {
@@ -725,4 +736,35 @@ section .contentBx .formBx .remember input[type=checkbox] {
 }
 .ChangeContent .text {
   font-size: 14px;
+}
+
+@media (max-width: 768px) {
+  .ChangeListTitle .Title {
+    letter-spacing: 0;
+  }
+  .ChangeListTitle .Title h4 {
+    font-size: 12px;
+  }
+  .ChangeList .Title h6 {
+    margin: auto;
+    text-align: center;
+    padding-left: 0;
+    font-size: 14px;
+  }
+  .ChangeList .Title .normal, .ChangeList .Title .back {
+    font-size: 12px;
+    padding: 0;
+  }
+  .ChangeList .Title ul {
+    flex-wrap: wrap;
+    justify-content: start;
+    flex-direction: row;
+  }
+  .ChangeList .Title ul li {
+    width: 25%;
+  }
+  .ChangeList .Title a {
+    font-size: 12px;
+    padding: 0.2rem 0.1rem;
+  }
 }/*# sourceMappingURL=style.css.map */

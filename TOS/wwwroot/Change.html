@@ -40,7 +40,7 @@
         <div class="collapse navbar-collapse" id="navbarNav">
           <ul class="navbar-nav">
             <li class="nav-item">
-              <a class="nav-link active" aria-current="page" href="#">主頁</a>
+              <a class="nav-link active" aria-current="page" href="Change.html">主頁</a>
             </li>
             <li class="nav-item">
               <a class="nav-link" href="User.html">我的列表</a>
@@ -62,16 +62,16 @@
         <button type="button" class="btn btn-outline-secondary">一般帳號</button>
         <button type="button" class="btn btn-outline-success">回鍋帳號</button>
       </div> -->
-      <div class="searchContextBx col-3">
+      <div class="searchContextBx col-12">
         <span>快速搜索:</span>
         <button type="button" v-on:click="getSmartData" id="smartbtn" class="btn btn-outline-info">智能配對</button>
         <!-- <button type="button" v-on:click="getAllData" class="btn btn-outline-info">一般檢視</button> -->
       </div>
       <div class=" searchContextBx col-4">
-        <form class="d-flex">
+        <!-- <form class="d-flex">
           <input class="form-control me-2" type="search" placeholder="Search" aria-label="Search">
           <button class="btn btn-outline-success" type="submit">Search</button>
-        </form>
+        </form> -->
       </div>
 
     </div>
@@ -191,9 +191,12 @@
             //console.log(res.data)
             $('#All').empty()
             data.smartdata = res.data
-            console.log(data.smartdata)
+            //console.log(data.smartdata)
           }).catch(err => {
-            console.log(err)
+            if(err.response.data == "尚未設定卡片") {
+              alert("請先點選 導覽列-我的列表設定資訊")
+            }
+            //console.log(err)
           })
         }
         const getAllData = () => {
@@ -214,23 +217,7 @@
     //console.log(data)
     const myVue = Vue.createApp(App).mount("#app");
   </script>
-  <script>
-
-    $('#LoginOut').on('click', function () {
-      axios({
-        method: "delete",
-        url: "api/Login"
-      }).then(
-        res => {
-          if (res.data == "登出") {
-            $(location).attr("href", "login.html")
-          }
-        }
-      ).catch(
-        err => console.log(err)
-      )
-    })
-  </script>
+  <script src="js/LogOut.js"></script>
 </body>
 
 </html>

@@ -65,8 +65,10 @@ namespace TOS.Controllers
             var username = Claim.Where(a => a.Type == "UserName").First().Value;
 
             var res = (from u in _db.Users
-                       where u.Username == username
+                       where u.Username == username && u.BackupState != null
                        select u).SingleOrDefault();
+                
+            if (res == null) return NotFound("尚未設定卡片");
             // 撈出我擁有的卡
             var userHaveCard = (from e in _db.ExchangeTables
                                 where e.UserId == res.Userid && e.CardState == 0

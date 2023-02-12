@@ -37,10 +37,10 @@ namespace TOS
             services.AddDbContext<TosDBContext>(options =>
             options.UseSqlServer(Configuration.GetConnectionString("linkToTosDB")));
 
-            services.AddSwaggerGen(c =>
-            {
-                c.SwaggerDoc("v1", new OpenApiInfo { Title = "TOS", Version = "v1" });
-            });
+            //services.AddSwaggerGen(c =>
+            //{
+            //    c.SwaggerDoc("v1", new OpenApiInfo { Title = "TOS", Version = "v1" });
+            //});
 
             // 自定義注入 
             services.AddHttpContextAccessor();
