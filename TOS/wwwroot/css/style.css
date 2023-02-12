@@ -43,6 +43,10 @@ body {
   height: 5vh;
 }
 
+#InfoText {
+  resize: none;
+}
+
 .middle-info {
   width: 100vw;
   margin: 0;
@@ -351,6 +355,11 @@ section .contentBx .formBx .remember input[type=checkbox] {
   height: 20px;
   margin: 0 0.2rem;
 }
+section .contentBx .formBx .remember a {
+  margin-left: 0.2rem;
+  color: #f53677;
+  text-decoration: none;
+}
 
 .playerpage {
   position: relative;
@@ -542,23 +551,25 @@ section .contentBx .formBx .remember input[type=checkbox] {
 }
 
 #radio input:checked + .button {
-  background: #5e7380;
+  background: #035277;
   color: #fff;
   cursor: default;
+  transition: 0.5s;
 }
 
 #radio .button {
   display: inline-block;
   margin: 0 5px 10px 0;
-  padding: 5px 10px;
+  padding: 10px 20px;
   background: #f7f7f7;
   color: #333;
   cursor: pointer;
 }
 
 #radio .button:hover {
-  background: #bbb;
+  background: #03a9f4;
   color: #fff;
+  transition: 0.5s;
 }
 
 #radio .round {
@@ -634,9 +645,20 @@ section .contentBx .formBx .remember input[type=checkbox] {
   z-index: -1;
   opacity: 1;
 }
+.checkBx .text {
+  padding-left: 0.2rem;
+  font-size: 8px;
+}
 
 .inputBx {
   margin: 1rem 0;
+}
+.inputBx label {
+  margin-right: 0.2rem;
+}
+
+.Chosebtn button {
+  margin: 0.2rem 0;
 }
 
 .searchBx {
@@ -738,6 +760,52 @@ section .contentBx .formBx .remember input[type=checkbox] {
   font-size: 14px;
 }
 
+.InfoBx .InfoContent {
+  font-size: 20px;
+}
+.InfoBx .InfoContent p {
+  word-wrap: break-word;
+  word-break: break-all;
+}
+.InfoBx .InfoContent button {
+  margin-left: 0.5rem;
+}
+.InfoBx .InfoContent .normal {
+  font-size: 20px;
+  padding: 0.1rem 1rem;
+  border: 2px solid #03a9f4;
+  background-color: #03a9f4;
+  border-radius: 0.6rem;
+  color: #fff;
+}
+.InfoBx .InfoContent .back {
+  font-size: 20px;
+  padding: 0.1rem 1rem;
+  border: 2px solid #028f76;
+  background-color: #028f76;
+  border-radius: 0.6rem;
+  color: #fff;
+}
+.InfoBx .InfoContent h4 {
+  margin: 1rem 0;
+}
+.InfoBx .InfoContent ul {
+  display: flex;
+  list-style: none;
+}
+.InfoBx .InfoContent ul li {
+  width: 96px;
+  margin: 0 0.3rem;
+}
+.InfoBx .InfoContent ul li img {
+  width: 100%;
+  -o-object-fit: contain;
+     object-fit: contain;
+}
+.InfoBx .InfoContent .text {
+  font-size: 26px;
+}
+
 @media (max-width: 768px) {
   .ChangeListTitle .Title {
     letter-spacing: 0;
@@ -751,7 +819,8 @@ section .contentBx .formBx .remember input[type=checkbox] {
     padding-left: 0;
     font-size: 14px;
   }
-  .ChangeList .Title .normal, .ChangeList .Title .back {
+  .ChangeList .Title .normal,
+  .ChangeList .Title .back {
     font-size: 12px;
     padding: 0;
   }

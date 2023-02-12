@@ -5,7 +5,7 @@
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>背包</title>
+    <title>設定我的列表</title>
 
     <!-- Bootstrap CSS -->
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/css/bootstrap.min.css" rel="stylesheet"
@@ -25,11 +25,15 @@
         .checkBx input[type="checkbox"] {
             display: none;
         }
+
+        .checkBx input[type="radio"] {
+            display: none;
+        }
     </style>
 </head>
 
 <body>
-    <div class="container-fluid">
+    <div class="container-fluid" id="app">
         <nav class="navbar navbar-expand-lg navbar-dark bg-dark">
             <div class="container-fluid">
                 <a class="navbar-brand" href="#">TOS</a>
@@ -38,200 +42,135 @@
                     <span class="navbar-toggler-icon"></span>
                 </button>
                 <div class="collapse navbar-collapse" id="navbarNav">
-                    <ul class="navbar-nav">
+                    <ul class="navbar-nav" v-if="data.userName === '未登入'">
                         <li class="nav-item">
-                            <a class="nav-link active" aria-current="page" href="Change.html">主頁</a>
-                          </li>
-                        <li class="nav-item">
-                            <a class="nav-link" href="User.html">我的列表</a>
+                          <a class="nav-link" aria-current="page" href="Change.html">主頁</a>
                         </li>
                         <li class="nav-item">
-                            <a class="nav-link" href="Change.html">交換列表</a>
+                          <a class="nav-link active" href="Change.html">交換列表</a>
                         </li>
                         <li class="nav-item">
-                            <a id="LoginOut" class="nav-link" href="#">登出</a>
+                          <a class="nav-link active" href="login.html">登入</a>
                         </li>
-                    </ul>
+                        <li class="nav-item">
+                          <a class="nav-link active" href="singup.html">註冊</a>
+                        </li>
+                      </ul>
+                      <ul class="navbar-nav" v-else>
+                        <li class="nav-item">
+                          <a class="nav-link" aria-current="page" href="Change.html">主頁</a>
+                        </li>
+                        <li class="nav-item">
+                          <a class="nav-link" href="#">{{data.userName.username}}</a>
+                        </li>
+                        <li class="nav-item">
+                          <a class="nav-link" href="User.html">我的列表</a>
+                        </li>
+                        <li class="nav-item">
+                          <a class="nav-link active" href="Change.html">交換列表</a>
+                        </li>
+                        <li class="nav-item">
+                          <a id="LoginOut" class="nav-link" href="#">登出</a>
+                        </li>
+                      </ul>
                 </div>
             </div>
         </nav>
 
-        <div class="formBx mt-2" id="app">
-            <!-- v-if="data.BackupState === 0" -->
-            <form>
+        <div class="formBx mt-2">
+            <form v-if="data.BackupState === 0">
                 <div id="radio">
                     <div class="inputBx col-12">
                         <label for="Backup">是否為回鍋帳號:</label>
                         <label><input type="radio" name="BackupState" value="true"><span
                                 class="round button">是</span></label>
-                        <label><input type="radio" name="BackupState" value="false"><span
+                        <label><input type="radio" name="BackupState" value="false" checked="checked"><span
                                 class="round button">否</span></label>
                     </div>
-                    <!-- 摺疊 -->
-                    <div class="Chosebtn">
-                        <a class="btn btn-primary me-2" data-bs-toggle="collapse" href="#multiCollapseExample1"
-                            role="button" aria-expanded="false" aria-controls="multiCollapseExample1">一抽進化抽中列表</a>
-                        <button class="btn btn-primary me-2" type="button" data-bs-toggle="collapse"
-                            data-bs-target="#multiCollapseExample2" aria-expanded="false"
-                            aria-controls="multiCollapseExample2">想交換列表</button>
-                        <button class="btn btn-primary" type="button" data-bs-toggle="collapse"
-                            data-bs-target=".multi-collapse" aria-expanded="false"
-                            aria-controls="multiCollapseExample1 multiCollapseExample2">全部展開/收起</button>
-                    </div>
-                    <p>
-
-                    </p>
-                    <div class="row">
-                        <!-- 摺疊列表 -->
-                        <div class="col-12">
-                            <div class="collapse multi-collapse" id="multiCollapseExample1">
-                                <h2>請設定帳號一抽列表</h2>
-                                <div class="checkBx">
-                                    <div class="itemBx" v-for="item in data.carddata">
-                                        <input type="checkbox" class="chose" :text="'list'+item.cardName"
-                                            v-bind:id="item.cardId" v-model="group" name="card"
-                                            v-bind:value="item.cardId"
-                                            :disabled="group.length >= max && group.indexOf(item.cardId) === -1">
-                                        <label class="col-1" :for="item.cardId"><img v-bind:src="item.cardImg"
-                                                alt=""></label>
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
-                        <div class="col">
-
-                            <div class="collapse multi-collapse" id="multiCollapseExample2">
-                                <h2>請設定想交換的列表</h2>
-                                <div class="checkBx">
-                                    <div class="itemBx" v-for="wantitem in data.carddata">
-                                        <input type="checkbox" class="chose" :text="'list'+wantitem.cardName"
-                                            v-bind:id="'want'+wantitem.cardId" v-model="wantgroup" name="wantcard"
-                                            v-bind:value="wantitem.cardId"
-                                            :disabled="wantgroup.length >= max && wantgroup.indexOf(wantitem.cardId) === -1">
-                                        <label class="col-1" :for="'want'+wantitem.cardId"><img
-                                                v-bind:src="wantitem.cardImg" alt=""></label>
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                    <!-- 摺疊 -->
                     <div class="mb-3">
-                        <label for="accountInfo" class="form-label">備註:(可輸入聯絡管道如巴哈、ptt站內等等 100字以內)</label>
+                        <label for="accountInfo" class="form-label">聯絡管道:(可貼巴哈連結、ptt站內等等資訊，100字以內)</label>
                         <textarea class="form-control" id="InfoText" rows="3" maxlength="100"
                             name="accountInfo"></textarea>
                     </div>
 
-                    <button type="button" id="btnSend"  class="btn btn-primary">送出</button>
+                    <div class="col-12">
+                        <h2>請設定帳號一抽列表 <span class="red">(送出後無法更改，請謹慎選擇)</span></h2>
+                        <div class="checkBx">
+                            <div class="itemBx" v-for="item in data.carddata">
+                                <input type="checkbox" class="chose" :text="'list'+item.cardName"
+                                    v-bind:id="item.cardId" v-model="group" name="card" v-bind:value="item.cardId"
+                                    :disabled="group.length >= max && group.indexOf(item.cardId) === -1">
+                                <label class="col-1" :for="item.cardId"><img v-bind:src="item.cardImg" alt=""><span class="text">{{item.cardName}}</span></label>
+                                
+                            </div>
+                            
+                        </div>
+                    </div>
+                    <div class="col-12">
+                        <h2>請設定想交換的列表</h2>
+                        <div class="checkBx">
+                            <div class="itemBx" v-for="wantitem in data.carddata">
+                                <input type="checkbox" class="chose" :text="'list'+wantitem.cardName"
+                                    v-bind:id="'want'+wantitem.cardId" v-model="wantgroup" name="wantcard"
+                                    v-bind:value="wantitem.cardId"
+                                    :disabled="wantgroup.length >= max && wantgroup.indexOf(wantitem.cardId) === -1">
+                                <label class="col-1" :for="'want'+wantitem.cardId"><img v-bind:src="wantitem.cardImg"
+                                        alt=""><span class="text">{{wantitem.cardName}}</span></label>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="col-12"><button type="button" id="btnSend" @click="PostData"
+                            class="btn btn-primary">送出</button></div>
                 </div>
             </form>
 
+            <div v-else class="InfoBx mt-2">
+                <div class="InfoContent">
+                    <h2>玩家姓名:{{data.userdata.userName}}</h2>
+                    <div>
+                        <span>帳號狀態:</span>
+                        <button v-if="data.userdata.userBackState === false" class="normal">一般</button>
+                        <button v-else class="back">回鍋</button>
+                    </div>
+                    <h4>持有列表:</h4>
+                    <ul>
+                        <li v-for="item in data.userdata.haveCard">
+                            <img :src="item.cardimg" alt="">
+                            <span>{{item.cardName}}</span>
+                        </li>
+                    </ul>
+                    <h4>想交換列表:</h4>
+                    <ul>
+                        <li v-for="item in data.userdata.wantCard">
+                            <img :src="item.cardimg" alt="">
+                            <span>{{item.cardName}}</span>
+                        </li>
+                    </ul>
+                    <div class="text">
+                        <p>聯絡管道:{{data.userdata.userAccountInfo}}</p>
+                    </div>
+
+                    <div class="col-12" v-if="data.userName.userState != 2">
+                        <h2>更新持有列表(可點選已被選走的卡片)</h2>
+                        <div class="checkBx">
+                            <div class="itemBx" v-for="item in data.userdata.haveCard">
+                                <input type="checkbox" class="chose" v-bind:id="item.cardId" v-model="group"
+                                    name="updatecard" v-bind:value="item.cardId"
+                                    :disabled="group.length >= (UpdateMax - data.userName.userState) && group.indexOf(item.cardId) === -1">
+                                <label class="col-1" :for="item.cardId"><img v-bind:src="item.cardimg" alt=""><span class="text">{{item.cardName}}</span></label>
+                            </div>
+                        </div>
+                        <button class="btn btn-primary" @click="UpdateChangeList">更新</button>
+                    </div>
+
+                </div>
+                
+            </div>
         </div>
     </div>
 
-    <script>
-        const { ref, reactive, onBeforeMount } = Vue;
-        const url = '/api/CardList'
-
-        const App = {
-            setup() {
-                const data = reactive({
-                    carddata: '',
-                    BackupState: ''
-                })
-                const group = ref([])
-                const wantgroup = ref([])
-                const max = 5
-                onBeforeMount(() => {
-                    axios.get(url).then(
-                        res => {
-                            //console.log(res.data)
-                            data.carddata = res.data
-                        }
-                    ).catch(err => {
-                        console.log(err)
-                    })
-
-                    axios({
-                        method: "get",
-                        url: "api/User",
-                    }).then(res => {
-                        //console.log(res)
-                        data.BackupState = res.data;
-                    }).catch(err => {
-                        console.log(err)
-                    })
-                })
-                return { data, group, wantgroup, max};
-            },
-        };
-
-
-        //console.log(data)
-        const myVue = Vue.createApp(App).mount("#app")
-
-    </script>
-    <script>
-        $('#btnSend').on('click', function () {
-            let resArray = [];
-            let wantresArray = [];
-            const accountInfoVal = $('textarea#InfoText').val();
-            $('input:checkbox[name=card]:checked').each(function () {
-                let res = $(this).val()
-                resArray.push(res)
-
-                // add $(this).val() to your array
-            });
-            $('input:checkbox[name=wantcard]:checked').each(function () {
-                let wantres = $(this).val()
-                wantresArray.push(wantres)
-
-                // add $(this).val() to your array
-            });
-            if (resArray.length != 5) {
-                alert("請選擇五張一抽抽中卡片")
-                return
-            }
-            if (wantresArray.length != 5) {
-                alert("請選擇五張想交換的卡片")
-                return
-            }
-            let BackupVal = $('input[name="BackupState"]:checked').val()
-            if (BackupVal == null) {
-                alert("請選擇帳號狀態!")
-                return
-            }
-            if (accountInfoVal == '') {
-                alert("請輸入聯絡管道!")
-                return
-            }
-            if (BackupVal == "true") {
-                BackupVal = true
-            }
-            else {
-                BackupVal = false
-            }
-            console.log(resArray)
-            console.log(wantresArray)
-            console.log(accountInfoVal)
-            axios({
-                method: 'post',
-                url: '/api/User',
-                data: {
-                    BackupState: BackupVal,
-                    HaveCard: resArray,
-                    Wantcard: wantresArray,
-                    AccountInfo: $('#accountInfo').val(),
-                }
-            }).then(res => {
-                console.log("Y")
-                $(location).attr("href", "Change.html")
-                //console.log(res)
-            }).catch(err => {
-                console.log(err)
-            })
-        })
-    </script>
+    <script src="js/User.js"></script>
     <script src="js/LogOut.js"></script>
 </body>
 

@@ -36,6 +36,8 @@ namespace TOS.Models
 
         protected override void OnModelCreating(ModelBuilder modelBuilder)
         {
+            modelBuilder.HasAnnotation("Relational:Collation", "Chinese_Taiwan_Stroke_CI_AS");
+
             modelBuilder.Entity<AttrTable>(entity =>
             {
                 entity.HasKey(e => e.AttrName);
@@ -108,6 +110,8 @@ namespace TOS.Models
                     .IsRequired()
                     .HasMaxLength(50)
                     .HasColumnName("card_img");
+
+                entity.Property(e => e.CardNum).HasColumnName("card_num");
             });
 
             modelBuilder.Entity<ExchangeTable>(entity =>
@@ -202,9 +206,8 @@ namespace TOS.Models
 
                 entity.Property(e => e.Password)
                     .IsRequired()
-                    .HasMaxLength(10)
-                    .HasColumnName("password")
-                    .IsFixedLength(true);
+                    .HasMaxLength(50)
+                    .HasColumnName("password");
 
                 entity.Property(e => e.Token)
                     .HasMaxLength(10)

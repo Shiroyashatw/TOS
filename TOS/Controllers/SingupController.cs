@@ -5,6 +5,8 @@ using System.Threading.Tasks;
 using TOS.Dtos;
 using TOS.Models;
 using System.Linq;
+using System.Text;
+using System;
 
 namespace TOS.Controllers
 {
@@ -34,10 +36,12 @@ namespace TOS.Controllers
             {
                 return NotFound("重複");
             }
+            var str = SingUpDtos.Password;
+            var md5 = MD5code(str);
             User insert = new User
             {
                 Account = SingUpDtos.Account,
-                Password = SingUpDtos.Password,
+                Password = md5,
                 Username = SingUpDtos.Username,
                 UserSingupTime = System.DateTime.Now,
                 UserState = 0
@@ -45,6 +49,18 @@ namespace TOS.Controllers
             _db.Users.Add(insert);
             await _db.SaveChangesAsync();
             return Ok("註冊成功");
+        }
+        //MD5加密
+        private String MD5code(String str)
+        {
+            System.Security.Cryptography.MD5CryptoServiceProvider md5Hasher = new System.Security.Cryptography.MD5CryptoServiceProvider();
+            Byte[] data = md5Hasher.ComputeHash((new System.Text.ASCIIEncoding()).GetBytes(str));
+            System.Text.StringBuilder sBuilder = new System.Text.StringBuilder();
+            for (int i = 0; i < data.Length; i++)
+            {
+                sBuilder.Append(data[i].ToString("x2"));
+            }
+            return sBuilder.ToString();
         }
     }
 }

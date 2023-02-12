@@ -1,0 +1,161 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>玩家資訊</title>
+
+    <!-- Bootstrap CSS -->
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/css/bootstrap.min.css" rel="stylesheet"
+        integrity="sha384-GLhlTQ8iRABdZLl6O3oVMWSktQOp6b7In1Zl3/Jr59b6EGGoI1aFkw7cmDA6j6gD" crossorigin="anonymous">
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/js/bootstrap.bundle.min.js"
+        integrity="sha384-w76AqPfDkMBDXo30jS1Sgez6pr3x5MlQ1ZAGC+nuZB+EYdgRZgiwxhTBTkF7CXvN"
+        crossorigin="anonymous"></script>
+    <!-- 引用Vue -->
+    <script src="https://unpkg.com/vue@3/dist/vue.global.js"></script>
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.1/jquery.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/axios@1.1.2/dist/axios.min.js"></script>
+
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.10.3/font/bootstrap-icons.css">
+    <link rel="stylesheet" href="css/style.css">
+
+
+</head>
+
+<body>
+    <div class="container-fluid" id="app">
+        <nav class="navbar navbar-expand-lg navbar-dark bg-dark">
+            <div class="container-fluid">
+                <a class="navbar-brand" href="#">TOS</a>
+                <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav"
+                    aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
+                    <span class="navbar-toggler-icon"></span>
+                </button>
+                <div class="collapse navbar-collapse" id="navbarNav">
+                    <ul class="navbar-nav" v-if="data.userName === '未登入'">
+                        <li class="nav-item">
+                          <a class="nav-link" aria-current="page" href="Change.html">主頁</a>
+                        </li>
+                        <li class="nav-item">
+                          <a class="nav-link active" href="Change.html">交換列表</a>
+                        </li>
+                        <li class="nav-item">
+                          <a class="nav-link active" href="login.html">登入</a>
+                        </li>
+                        <li class="nav-item">
+                          <a class="nav-link active" href="singup.html">註冊</a>
+                        </li>
+                      </ul>
+                      <ul class="navbar-nav" v-else>
+                        <li class="nav-item">
+                          <a class="nav-link" aria-current="page" href="Change.html">主頁</a>
+                        </li>
+                        <li class="nav-item">
+                          <a class="nav-link" href="#">{{data.userName.username}}</a>
+                        </li>
+                        <li class="nav-item">
+                          <a class="nav-link" href="User.html">我的列表</a>
+                        </li>
+                        <li class="nav-item">
+                          <a class="nav-link active" href="Change.html">交換列表</a>
+                        </li>
+                        <li class="nav-item">
+                          <a id="LoginOut" class="nav-link" href="#">登出</a>
+                        </li>
+                      </ul>
+                </div>
+            </div>
+        </nav>
+
+        <div class="InfoBx mt-2">
+            <div class="InfoContent">
+                <h2>玩家姓名:{{data.carddata.userName}}</h2>
+                <div>
+                    <span>帳號狀態:</span>
+                    <button v-if="data.carddata.userBackState === false" class="normal">一般</button>
+                    <button v-else class="back">回鍋</button>
+                </div>
+
+                <h4>持有列表:</h4>
+                <ul>
+                    <li v-for="item in data.carddata.haveCard">
+                        <img :src="item.cardimg" alt="">
+                        <span>{{item.cardName}}</span>
+                    </li>
+                </ul>
+                <h4>想交換列表:</h4>
+                <ul>
+                    <li v-for="item in data.carddata.wantCard">
+                        <img :src="item.cardimg" alt="">
+                        <span>{{item.cardName}}</span>
+                    </li>
+                </ul>
+                <div>
+                    <p>聯絡管道:{{data.carddata.userAccountInfo}}</p>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <script>
+        const { ref, reactive, onBeforeMount } = Vue;
+        // 讀取當前網址 
+        const getUrlString = location.href;
+        const Nowurl = new URL(getUrlString);
+
+        // 根據前面網址抓取 撈後面參數資料 UserId 進行設定
+        const UserId = Nowurl.searchParams.get('id');
+        const url = `/api/User/` + UserId
+        const login = "/api/User/UserName";
+
+
+
+        const App = {
+            setup() {
+                const data = reactive({
+                    carddata: '',
+                    BackupState: '',
+                    userName: "",
+                })
+                onBeforeMount(() => {
+                    axios.get(url).then(
+                        res => {
+                            //console.log(res.data)
+                            data.carddata = res.data
+                        }
+                    ).catch(err => {
+                        console.log(err)
+                    })
+
+                    axios({
+                        method: "get",
+                        url: "api/User",
+                    }).then(res => {
+                        //console.log(res)
+                        data.BackupState = res.data;
+                    }).catch(err => {
+                        console.log(err)
+                    })
+
+                    axios.get(login).then(res => {
+                        console.log(res.data)
+                        data.userName = res.data
+                    }).catch(err => {
+                        console.log(err)
+                    })
+                })
+                return { data };
+            },
+        };
+
+
+        //console.log(data)
+        const myVue = Vue.createApp(App).mount("#app")
+
+    </script>
+    <script src="js/LogOut.js"></script>
+</body>
+
+</html>

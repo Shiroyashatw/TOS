@@ -10,6 +10,7 @@ using System.Security.Claims;
 using Microsoft.AspNetCore.Authentication.Cookies;
 using Microsoft.AspNetCore.Authentication;
 using Microsoft.AspNetCore.Authorization;
+using TOS.Dtos;
 
 namespace TOS.Controllers
 {
@@ -51,9 +52,11 @@ namespace TOS.Controllers
             //    return "已登入";
             //}
             // 搜尋對應帳號密碼 因帳號是唯一值 故後面加上SingleOrDefault()
+            var str = value.Password;
+            var md5 = MD5code(str);
             var user = (from u in _db.Users
                         where u.Account == value.Account
-                        && u.Password == value.Password
+                        && u.Password == md5
                         select u).SingleOrDefault();
 
             if (user == null)
@@ -94,6 +97,17 @@ namespace TOS.Controllers
         {
             return "尚未登入";
         }
-        
+        //MD5加密
+        private String MD5code(String str)
+        {
+            System.Security.Cryptography.MD5CryptoServiceProvider md5Hasher = new System.Security.Cryptography.MD5CryptoServiceProvider();
+            Byte[] data = md5Hasher.ComputeHash((new System.Text.ASCIIEncoding()).GetBytes(str));
+            System.Text.StringBuilder sBuilder = new System.Text.StringBuilder();
+            for (int i = 0; i < data.Length; i++)
+            {
+                sBuilder.Append(data[i].ToString("x2"));
+            }
+            return sBuilder.ToString();
+        }
     }
 }

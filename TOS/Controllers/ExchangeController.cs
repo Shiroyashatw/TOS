@@ -12,6 +12,7 @@ namespace TOS.Controllers
 {
     [Route("api/[controller]")]
     [ApiController]
+    [AllowAnonymous]
     public class ExchangeController : ControllerBase
     {
         private readonly TosDBContext _db;
@@ -28,6 +29,7 @@ namespace TOS.Controllers
                            where u.BackupState != null
                            select new
                            {
+                               UserId = u.Userid,
                                UserName = u.Username,
                                UserBackState = u.BackupState,
                                UserAccountInfo = u.AccountInfo,
@@ -78,22 +80,41 @@ namespace TOS.Controllers
                                 where e.UserId == res.Userid && e.CardState == 3
                                 select e.CardId);
             // 分別放入 List中
+            
             List<short> myHaveCardList = new List<short>();
             foreach (var item in userHaveCard)
             {
                 myHaveCardList.Add(item);
             }
+            
             List<short> myWantCardList = new List<short>();
             foreach (var Watnitem in userWantCard)
             {
                 myWantCardList.Add(Watnitem);
+            }
+            
+            if (myHaveCardList.Count() < 5)
+            {
+                var gap = 5 - (myHaveCardList.Count());
+                for (int i = 0; i < gap; i++)
+                {
+                    myHaveCardList.Add(0);
+                }
+            }
+            if (myWantCardList.Count() < 5)
+            {
+                var gap = 5 - (myWantCardList.Count());
+                for (int i = 0; i < gap; i++)
+                {
+                    myWantCardList.Add(0);
+                }
             }
             // 撈出總表 篩選出全部玩家想要交換的卡 where e.CardId == userHaveCard.Cardid 就能撈出第一階段 我有的卡別人想要
             var data = (from u in _db.Users
                        where u.Userid != res.Userid
                        select new
                        {
-                           userId = u.Userid,
+                           UserId = u.Userid,
                            userName = u.Username,
                            userBackupState = u.BackupState,
                            //撈出其他玩家持有的卡片有符合自己想交換的

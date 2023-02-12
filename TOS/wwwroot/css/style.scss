@@ -51,7 +51,9 @@ body {
   width: 100vw;
   height: 5vh;
 }
-
+#InfoText {
+  resize: none;
+}
 .middle-info {
   // background-color: blanchedalmond;
   width: 100vw;
@@ -430,6 +432,15 @@ section {
           height: 20px;
           margin: 0 0.2rem;
         }
+        a {
+          margin-left: .2rem;
+          color: #f53677;
+          text-decoration: none;
+          // &:hover{
+          //   color: #607d8b;
+          //   transition: .5s;
+          // }
+        }
       }
     }
   }
@@ -668,23 +679,25 @@ section {
 }
 
 #radio input:checked + .button {
-  background: #5e7380;
+  background: #035277;
   color: #fff;
   cursor: default;
+  transition: 0.5s;
 }
 
 #radio .button {
   display: inline-block;
   margin: 0 5px 10px 0;
-  padding: 5px 10px;
+  padding: 10px 20px;
   background: #f7f7f7;
   color: #333;
   cursor: pointer;
 }
 
 #radio .button:hover {
-  background: #bbb;
+  background: #03a9f4;
   color: #fff;
+  transition: 0.5s;
 }
 
 #radio .round {
@@ -782,22 +795,34 @@ section {
     z-index: -1;
     opacity: 1;
   }
+  .text {
+    padding-left: .2rem;
+    font-size: 8px;
+  }
 }
 
 .inputBx {
   margin: 1rem 0;
+  label {
+    margin-right: 0.2rem;
+  }
+}
+.Chosebtn {
+  button {
+    margin: 0.2rem 0;
+  }
 }
 // 搜索列
 .searchBx {
-  margin: .4rem;
-  .searchContextBx{
+  margin: 0.4rem;
+  .searchContextBx {
     span {
       margin: auto;
       font-size: 20px;
-      margin-right: .2rem;
+      margin-right: 0.2rem;
     }
     button {
-      margin: 0 .2rem;
+      margin: 0 0.2rem;
     }
   }
 }
@@ -809,9 +834,9 @@ section {
   align-items: center;
   justify-content: center;
   .Title {
-    padding: .3rem 0;
+    padding: 0.3rem 0;
     color: #fff;
-    letter-spacing: .1rem;
+    letter-spacing: 0.1rem;
     border: 2px solid #fff;
     background-color: #035277;
     h4 {
@@ -827,7 +852,7 @@ section {
   text-align: center;
   align-items: center;
   height: 12vh;
-  border-bottom: 4px solid #607d8b  ;
+  border-bottom: 4px solid #607d8b;
   //justify-content: center;
   h6 {
     padding-left: 2rem;
@@ -842,31 +867,31 @@ section {
   }
   .back {
     font-size: 24px;
-    padding: .4rem 1rem;
+    padding: 0.4rem 1rem;
     border: 2px solid #028f76;
     background-color: #028f76;
-    border-radius: .6rem;
+    border-radius: 0.6rem;
     color: #fff;
   }
   .normal {
     font-size: 24px;
-    padding: .4rem 1rem;
+    padding: 0.4rem 1rem;
     border: 2px solid #03a9f4;
     background-color: #03a9f4;
-    border-radius: .6rem;
+    border-radius: 0.6rem;
     color: #fff;
   }
   .Title {
     //display: flex;
     a {
-      padding: .5rem 1rem;
+      padding: 0.5rem 1rem;
       color: #fff;
       background-color: #035277;
       border-radius: 1rem;
       text-decoration: none;
-      &:hover{
+      &:hover {
         background-color: #9e0c39;
-        transition: .3s;
+        transition: 0.3s;
       }
     }
   }
@@ -891,7 +916,55 @@ section {
     font-size: 14px;
   }
 }
-
+// 玩家頁面
+.InfoBx {
+  .InfoContent {
+    font-size: 20px;
+    p {
+      
+      word-wrap: break-word;
+      word-break: break-all;
+    }
+    button {
+      margin-left: 0.5rem;
+    }
+    .normal {
+      font-size: 20px;
+      padding: 0.1rem 1rem;
+      border: 2px solid #03a9f4;
+      background-color: #03a9f4;
+      border-radius: 0.6rem;
+      color: #fff;
+    }
+    .back {
+      font-size: 20px;
+      padding: 0.1rem 1rem;
+      border: 2px solid #028f76;
+      background-color: #028f76;
+      border-radius: 0.6rem;
+      color: #fff;
+    }
+    h4 {
+      
+      margin: 1rem 0;
+    }
+    ul {
+      display: flex;
+      list-style: none;
+      li {
+        width: 96px;
+        margin: 0 0.3rem;
+        img {
+          width: 100%;
+          object-fit: contain;
+        }
+      }
+    }
+    .text {
+      font-size: 26px;
+    }
+  }
+}
 @media (max-width: 768px) {
   .ChangeListTitle {
     .Title {
@@ -909,7 +982,8 @@ section {
         padding-left: 0;
         font-size: 14px;
       }
-      .normal,.back {
+      .normal,
+      .back {
         font-size: 12px;
         padding: 0;
       }
@@ -925,6 +999,7 @@ section {
         font-size: 12px;
         padding: 0.2rem 0.1rem;
       }
+      
     }
   }
 }

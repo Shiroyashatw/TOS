@@ -1,10 +1,15 @@
 $('#btnSend').on('click', function () {
     const InputAccVal = $('input[name="account"]').val()
     const InputPasVal = $('input[name="password"]').val()
+    const InputCkPasVal = $('input[name="Checkpassword"]').val()
     const InputNameVal = $('input[name="username"]').val()
 
-    if(InputAccVal == '' || InputPasVal == '' || InputNameVal == ''){
+    if(InputAccVal == '' || InputPasVal == '' || InputNameVal == '' || InputCkPasVal == ''){
         alert("有欄位尚未輸入")
+        return
+    }
+    if(InputPasVal != InputCkPasVal){
+        alert("密碼確認錯誤，請重新輸入確認")
         return
     }
     axios({

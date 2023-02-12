@@ -29,11 +29,12 @@ namespace TOS.Controllers
 
             var username = Claim.Where(a => a.Type == "UserName").First().Value;
 
+            // 查詢是否已設定列表
             var res = (from u in _db.Users
-                      where u.Username == username && u.BackupState != null
-                      select u).SingleOrDefault();
-            
-            if(res == null)
+                       where u.Username == username && u.BackupState != null
+                       select u).SingleOrDefault();
+
+            if (res == null)
             {
                 return "0";
             }
@@ -42,6 +43,119 @@ namespace TOS.Controllers
                 return "1";
             }
 
+        }
+        [HttpGet]
+        [Route("UserName")]
+        [AllowAnonymous]
+        public ActionResult GetUserName()
+        {
+            var Claim = _contextAccessor.HttpContext.User.Claims.ToList();
+            if (Claim.Count() == 0) return Ok("未登入");
+            
+            var username = Claim.Where(a => a.Type == "UserName").First().Value;
+
+            var res = (from u in _db.Users
+                       where u.Username == username
+                       select new
+                       {
+                           u.Username,
+                           u.UserState
+                       }).SingleOrDefault();
+            if (res == null)
+            {
+                return Ok("未登入");
+            }
+            else
+            {
+                return Ok(res);
+            }
+
+        }
+        [HttpGet]
+        [Route("{id}")]
+        [AllowAnonymous]
+        public ActionResult<ExchangeTableDto> GetUserExTableData(int id)
+        {
+            var userInfo = (from u in _db.Users
+                           where u.BackupState != null && u.Userid == id
+                           select new
+                           {
+                               UserName = u.Username,
+                               UserBackState = u.BackupState,
+                               UserAccountInfo = u.AccountInfo,
+                               HaveCard = (from e in _db.ExchangeTables
+                                           join c in _db.CardListTables
+                                           on e.CardId equals c.CardId
+                                           where e.UserId == u.Userid && e.CardState == 0
+                                           select new
+                                           {
+                                               CardId = e.CardId,
+                                               CardName = c.CardName,
+                                               Cardimg = c.CardImg
+                                           }).ToList(),
+                               WantCard = (from e in _db.ExchangeTables
+                                           join c in _db.CardListTables
+                                           on e.CardId equals c.CardId
+                                           where e.UserId == u.Userid && e.CardState == 3
+                                           select new
+                                           {
+                                               CardId = e.CardId,
+                                               CardName = c.CardName,
+                                               Cardimg = c.CardImg
+                                           }).ToList()
+                           }).SingleOrDefault();
+            
+            if (userInfo == null) return NotFound("無對應玩家ID");
+
+            return Ok(userInfo);
+        }
+        [HttpGet]
+        [Route("Info")]
+        public ActionResult<ExchangeTableDto> GetUserInfoData()
+        {
+            var Claim = _contextAccessor.HttpContext.User.Claims.ToList();
+
+            var username = Claim.Where(a => a.Type == "UserName").First().Value;
+
+            var res = (from u in _db.Users
+                       where u.Username == username && u.BackupState != null
+                       select u).SingleOrDefault();
+            if(res == null)
+            {
+                return NotFound("查無該玩家");
+            }
+            var userInfo = (from u in _db.Users
+                            where u.BackupState != null && u.Username == res.Username
+                            select new
+                            {
+                                UserName = u.Username,
+                                UserBackState = u.BackupState,
+                                UserAccountInfo = u.AccountInfo,
+                                HaveCard = (from e in _db.ExchangeTables
+                                            join c in _db.CardListTables
+                                            on e.CardId equals c.CardId
+                                            where e.UserId == u.Userid && e.CardState == 0
+                                            select new
+                                            {
+                                                CardId = e.CardId,
+                                                CardName = c.CardName,
+                                                Cardimg = c.CardImg
+                                            }).ToList(),
+                                WantCard = (from e in _db.ExchangeTables
+                                            join c in _db.CardListTables
+                                            on e.CardId equals c.CardId
+                                            where e.UserId == u.Userid && e.CardState == 3
+                                            select new
+                                            {
+                                                CardId = e.CardId,
+                                                CardName = c.CardName,
+                                                Cardimg = c.CardImg
+                                            }).ToList()
+                            }).SingleOrDefault();
+
+            if (userInfo == null) return NotFound("查無該玩家");
+
+            return Ok(userInfo);
         }
         [HttpPost]
         public ActionResult<ExchangeTableDto> PostData(ExchangeTableDto exchangeTableDtos)
@@ -90,6 +204,32 @@ namespace TOS.Controllers
             _db.SaveChanges();
             return Content("123");
         }
-        
+        [HttpPatch]
+        public ActionResult<UpdateChangeDto> UpdateChangeList(UpdateChangeDto update)
+        {
+            var total = update.UpdateChangeList.Length;
+
+            var Claim = _contextAccessor.HttpContext.User.Claims.ToList();
+
+            var username = Claim.Where(a => a.Type == "UserName").First().Value;
+
+            // 查詢是否已設定列表
+            var res = (from u in _db.Users
+                       where u.Username == username && u.BackupState != null
+                       select u).SingleOrDefault();
+
+            var changeList = from e in _db.ExchangeTables
+                             where e.UserId == res.Userid && e.CardState == 0
+                             select e;
+            for (int i = 0; i < total; i++)
+            {
+                var up = changeList.Where(x => x.CardId == update.UpdateChangeList[i]).SingleOrDefault();
+                up.CardState = 1;
+                up.UpdateTime = DateTime.Now;
+            }
+            res.UserState += (short)total;
+            _db.SaveChanges();
+            return Ok("更新成功");
+        } 
     }
 }
