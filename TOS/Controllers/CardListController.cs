@@ -24,6 +24,7 @@ namespace TOS.Controllers
         public ActionResult<CardListTable> GetCard()
         {
             var res = (from c in _db.CardListTables
+                       where c.CardId != 9 && c.CardId != 10
                        select c).OrderBy(a => a.CardId);
 
             return Ok(res.ToList());
