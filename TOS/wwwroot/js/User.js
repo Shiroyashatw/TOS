@@ -16,7 +16,7 @@ const { ref, reactive, onBeforeMount } = Vue;
                 onBeforeMount(() => {
                     axios.get(url).then(
                         res => {
-                            console.log(res.data)
+                            //console.log(res.data)
                             data.carddata = res.data
                         }
                     ).catch(err => {

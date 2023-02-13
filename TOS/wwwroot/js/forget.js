@@ -49,7 +49,7 @@ const { ref, reactive } = Vue;
                             username: data.username,
                         }
                     }).then(res => {
-                        console.log(res.data)
+                        //console.log(res.data)
                         if (res.data == "Ok") {
                             alert("密碼重設成功!")
                             $(location).attr("href", "login.html")

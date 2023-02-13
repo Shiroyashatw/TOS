@@ -757,7 +757,7 @@ section .contentBx .formBx .remember a {
      object-fit: contain;
 }
 .ChangeContent .text {
-  font-size: 14px;
+  font-size: 10px;
 }
 
 .InfoBx .InfoContent {
@@ -803,7 +803,10 @@ section .contentBx .formBx .remember a {
      object-fit: contain;
 }
 .InfoBx .InfoContent .text {
-  font-size: 26px;
+  font-size: 12px;
+}
+.InfoBx .InfoContent .text p {
+  font-size: 32px;
 }
 
 @media (max-width: 768px) {

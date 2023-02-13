@@ -171,8 +171,15 @@ namespace TOS.Controllers
             // 更新帳號 回鍋狀態跟聯絡管道
             res.BackupState = exchangeTableDtos.BackupState;
             res.AccountInfo = exchangeTableDtos.AccountInfo;
-            
 
+            var changeList = from e in _db.ExchangeTables
+                             where e.UserId == res.Userid
+                             select e.CardListId;
+                              
+            if(changeList.Count() >= 10)
+            {
+                return NotFound("已進行過設置");
+            }
             for(int i = 0; i < exchangeTableDtos.HaveCard.Length; i++)
             {
                 ExchangeTable exchangeTable = new ExchangeTable

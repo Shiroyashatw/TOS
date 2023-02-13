@@ -26,7 +26,7 @@ namespace TOS.Controllers
         public ActionResult<ExchangeTable> GetExchangeData()
         {
             var userList = from u in _db.Users
-                           where u.BackupState != null
+                           where u.BackupState != null && u.UserState != 2
                            select new
                            {
                                UserId = u.Userid,
@@ -111,7 +111,7 @@ namespace TOS.Controllers
             }
             // 撈出總表 篩選出全部玩家想要交換的卡 where e.CardId == userHaveCard.Cardid 就能撈出第一階段 我有的卡別人想要
             var data = (from u in _db.Users
-                       where u.Userid != res.Userid
+                       where u.Userid != res.Userid && u.UserState != 2
                        select new
                        {
                            UserId = u.Userid,
