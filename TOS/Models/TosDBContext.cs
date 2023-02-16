@@ -194,7 +194,7 @@ namespace TOS.Models
                 entity.HasKey(e => e.Account);
 
                 entity.Property(e => e.Account)
-                    .HasMaxLength(10)
+                    .HasMaxLength(15)
                     .HasColumnName("account")
                     .IsFixedLength(true);
 
@@ -206,7 +206,7 @@ namespace TOS.Models
 
                 entity.Property(e => e.Password)
                     .IsRequired()
-                    .HasMaxLength(50)
+                    .HasMaxLength(35)
                     .HasColumnName("password");
 
                 entity.Property(e => e.Token)
